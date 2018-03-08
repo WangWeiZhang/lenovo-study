@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+			
+		//为什么使用原型？举例说明。比如，我现在有一个arr1 和 arr2 两个数组。我想给数组对象扩展一个sum求和的方法
+		
+			var arr1 = new Array(12,12,12,12);
+			var arr2 = new Array(10,10,10,10);
+			
+			arr1.sum = function(){
+				var result = 0;
+				var i = 0;
+				for(i; i<this.length; i++){
+					result = result + this[i];
+				}
+				return result;
+			}
+			
+			alert(arr1.sum());//48
+			alert(arr2.sum());//报错sum is not define
+		
+		/*
+		 eg:css
+		
+			class     改变一类元素的样式      应该就是我们要学的prototype
+			行间样式    改变一个元素的样式      就是给一个对象家方法或属性，就像上面的数组只给arr1添加了sum方法
+			
+			.box{ color:red; }  
+			
+			<div class="box" style = "color:green"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+		 * */
+		
+		//注意：这种对 数组对象扩展的方法，需要给每一个都扩展，代码冗余，而且方法地址还不一样。所以使用prototype
+</script>

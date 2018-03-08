@@ -1,0 +1,43 @@
+一、个人常用rem对照表
+
+1rem = 18.75px;
+
+4rem = 0.213rem;
+
+6rem = 0.32rem;
+
+8rem = 0.427rem;
+
+9rem = 0.48rem;
+
+10rem = 0.533rem;
+
+12px = 0.64rem;
+
+13px = 0.693rem;
+
+16px = 0.853rem;
+
+18px = 0.96rem;
+
+20px = 
+
+23px = 1.227rem;
+
+24px = 1.28rem;
+
+26px = 1.39rem;
+
+28px = 1.493rem;
+
+30px = 1.6rem;
+
+32px = 1.707rem;
+
+35px = 1.867rem;
+
+56px = 2.987rem;
+
+
+    background: -webkit-linear-gradient(bottom,#32313e,#22212f );
+

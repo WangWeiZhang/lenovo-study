@@ -1,0 +1,24 @@
+移动端rem设置，自动更改html<font-size>
+
+<script>        
+        (function (doc, win) {    
+            var docEl = doc.documentElement,    
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',    
+            recalc = function () {    
+            var clientWidth = docEl.clientWidth;    
+            if (!clientWidth) return;    
+            docEl.style.fontSize = 10 * (clientWidth / 1366) + 'px';    
+        };    
+        if (!doc.addEventListener) return;    
+        win.addEventListener(resizeEvt, recalc, false);    
+        doc.addEventListener('DOMContentLoaded', recalc, false);    
+        })(document, window);    
+ </script>
+复制代码
+加入这么一段js，就可以根据屏幕的宽度动态改变font-size
+
+根据这一句 docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';  可知
+
+iphone4宽度是320px，那么font-size就是20px, 100px就是5rem
+
+iphone6宽度是375px，那么font-size就是23.4375px,100px就是4.267rem

@@ -1,0 +1,186 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+body{
+	background-color:#999;
+}
+body,html{
+	width: 100%;
+}
+
+.main{
+	width: 100%;
+	padding:20px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.box , .double-box , .three-box , .four-box , .six-box , .nice-box{
+	width: 100px;
+	height: 100px;
+	background:#000;
+	border-radius: 5px;
+	padding: 10px;
+	margin-right: 10px;
+}
+
+.item{
+	width:24px;
+	height:24px;
+	display: inline-block;
+	background:#fff;
+	border-radius:14px;
+}
+
+.box , .double-box , .three-box , .four-box , .six-box , .nice-box{
+	display: flex;
+}
+
+.box1{
+	display: flex;
+	justify-content: center;
+}
+
+.box2{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.box3{
+	display: flex;
+	align-items: center;
+}
+
+.box4{
+	display: flex;
+	align-items: flex-end;
+}
+
+.box5{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.box6{
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.box7{
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+
+
+.dbox1{
+	display: flex;
+	justify-content: space-between;
+}
+
+.dbox2{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.dbox3{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.dbox4{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.dbox5{
+	display: flex;
+}
+.dbox5 .item:nth-child(2){
+	align-self: center;
+}
+
+.dbox6{
+	display: flex;
+	justify-content: space-between;
+}
+.dbox6 .item:nth-child(2){
+	align-self: flex-end;
+}
+
+.tbox1{
+	display: flex;
+}
+.tbox1 .item:nth-child(2){
+	align-self: center;
+}
+.tbox1 .item:nth-child(3){
+	align-self: flex-end;
+}
+
+.fbox1{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: space-between;
+	flex-direction: row-reverse;
+}
+
+.fbox2{
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
+}
+
+.fbox2 .row{
+	flex-basis:100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.sbox1{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: space-between;
+}
+.sbox2{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: space-between;
+}
+
+.sbox3{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.sbox3 .row{
+	display: flex;
+	justify-content: space-between;
+}
+.sbox3 .row:nth-child(2){
+	justify-content: center;
+}
+
+.nbox4{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: space-between;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../vue.js">
+		</script>
+	</head>
+	<body>
+		<div id="vue-app">
+			<h1>vue键盘事件结合组合按键</h1>
+			<label> keyup-alt-enter： </label>
+			<input type="text" v-on:keyup.alt.enter="keyupAltEnter" />
+			<label> keyup-enter： </label>
+			<input type="text" v-on:keyup.enter="keyupEnter" />
+			<label> keyup： </label>
+			<input type="text" v-on:keyup="keyUp" />
+		</div>
+		
+		<div id="vue-app1">
+			<h1>vue键盘事件结合组合按键</h1>
+			<label> keyup-alt-enter： </label>
+			<input type="text" v-on:keyup.alt.enter="keyupAltEnter" />
+			<label> keyup-enter： </label>
+			<input type="text" v-on:keyup.enter="keyupEnter" />
+			<label> keyup： </label>
+			<input type="text" v-on:keyup="keyUp" />
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		
+		var a =new Vue({
+			el:"#vue-app",
+			data:{
+				name:"wwz",
+				age:30,
+				sex:"男"
+			},
+			methods:{
+				keyupAltEnter:function(){
+					console.log("您按下了keyup-alt-enter组合键！")
+				},
+				keyupEnter:function(){
+					console.log("您按下了keyup-enter组合键！")
+				},
+				keyUp:function(){
+					console.log("您按下了keyup键！")
+				}
+			}
+		})
+		
+		new Vue({
+			el:"#vue-app1",
+			data:{
+				name:"wwz",
+				age:30,
+				sex:"男"
+			},
+			methods:{
+				keyupAltEnter:function(){
+					console.log("#vue-app1您按下了keyup-alt-enter组合键！")
+				},
+				keyupEnter:function(){
+					console.log("#vue-app1您按下了keyup-enter组合键！")
+				},
+				keyUp:function(){
+					console.log("#vue-app1您按下了keyup键！")
+				}
+			}
+		})
+	</script>
+</html>

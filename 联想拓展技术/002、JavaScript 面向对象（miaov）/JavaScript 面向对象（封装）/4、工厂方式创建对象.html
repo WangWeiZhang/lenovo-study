@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	function createPerson(name , sex){   //构造函数 //createPerson 是用来构造对象的，所以命名为“构造函数”
+		//工厂原料
+		var obj = new Object();
+		
+		//原料加工
+		obj.name = name;
+		obj.sex = sex;
+		
+		obj.showName = function(){
+			alert(this.name);
+		}
+		
+		obj.showSex = function(){
+			alert(this.sex);
+		}
+		
+		//产品
+		return obj;  //注意
+	}
+	
+	var person1 = createPerson("Blue" , "男");
+	var person2 = createPerson("Tom" , "女");
+	
+	person1.showName();
+	person2.showName();
+	/*
+	 优点：
+	 	1、和object相比效果一模一样
+	 	2、好在，在创建对象的时候，调一下函数就好
+	工厂方式的问题，缺点：
+		a、没有看见两个对象之间的联系，看不出是否共同属于某个对象 （没使用new）
+		
+		b、两个对象的调用的时候，都创建各自的空间，所以浪费内存，资源。（因为每次调用的时候都是一个new function）
+			alert(person1.showName == person2.showName)//false
+	*/
+	
+	/*  //在此需要知道一些 关于function的概念
+		函数：独立于window的function我们叫做函数。
+		方法：属于某一个对象的，我们叫做方法。
+		事件处理函数：绑定事件，触发函数方法，我们叫做事件处理函数。
+		构造函数：构造对象的function我们叫做构造函数
+	 */
+	
+	//总结: 工厂方式相比原始模式，在创建对个对象的时候，已经解决了代码冗余的问题。
+	//		但是，没有使用new操作符，我们没法实现真正的继承，封装，不浪费内存。
+	//		如何实现呢？ （请看 5、new操作符创建对象）
+</script>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jquery实现Facebook模态框</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/animate.min.css"/>
+	</head>
+	<style type="text/css">
+		*{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		
+		.box{
+			width: 1000px;
+			height: 700px;
+			background:#999999;
+			margin:0px auto;
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		.top{
+			width: 400px;
+			height: 60px;
+			background: #336699;
+			opacity: 0;
+		}
+		
+		.bottom{
+			width: 400px;
+			
+			background: #fff;
+			/*display: none;*/
+			opacity: 0;
+		}
+	.animatedd {
+	    -webkit-animation-duration: 1s;
+	    animation-duration: 1s;
+	    -webkit-animation-fill-mode: both;
+	    animation-fill-mode: both
+	}
+	/*@-webkit-keyframes flipInX {
+	    0% {
+	        height:200px;
+	    }
+	    0%, 40% {
+	    	 height:300px;
+	    }
+	    40% {
+	    	height:400px;
+	    }
+	    60% {
+	    	height:500px;
+	    }
+	    80% {
+	    }
+	    to {
+	    }
+	}	*/
+
+	@keyframes myself {
+	    0% {
+	        height:0px;
+
+	    }
+	    0%, 30% {
+	    	height:0px;
+
+	    	opacity: 0.3;
+	    }
+	    30% {
+	    	height:0px;
+
+	    	opacity: 0.4;
+	    }
+	    60% {
+	    	height:400px;
+
+	    	opacity: 0.5;
+	    }
+	    100% {
+	    	height:430px;
+
+	    	opacity: 1;
+	    }
+	    
+	}
+	
+	@keyframes myselfUp {
+	    0% {
+	    	height:430px;
+	        opacity:1;
+	    }
+	    0%, 30% {
+	    	height:430px;
+	    	opacity:1;
+	    }
+	    30% {
+	    	height:430px;
+	    	opacity:1;
+	    }
+	    60% {
+	    	height:40px;
+	    	opacity:1;
+	    }
+	    100% {
+	    	height:0px;
+	    	opacity: 1;
+	    }
+	    
+	}
+
+	.myself {
+	    -webkit-backface-visibility: visible !important;
+	    backface-visibility: visible !important;
+	    -webkit-animation-name: myself;
+	    animation-name: myself
+	}
+	
+	.myselfUp {
+	    -webkit-backface-visibility: visible !important;
+	    backface-visibility: visible !important;
+	    -webkit-animation-name: myselfUp;
+	    animation-name: myselfUp
+	}
+	</style>
+	<script>
+		$(function(){
+//			$(".top").animate({"opacity":1} , 1000);
+			setTimeout(function(){} , 200);
+//				$(".bottom").addClass("animatedd myself");
+			
+			
+			$("button").click(function(){
+				$(".bottom").attr("class","bottom animatedd myselfUp");
+				setTimeout(function(){
+					$(".top").attr("class","top animated fadeOut");
+				} , 600)
+			})
+		})
+	</script>
+	<body>
+		<div class='box'>
+			<div class="moduleTip">
+				<div class="top animated fadeIn">header</div>
+				<div class="bottom animatedd myself"></div>
+			</div>
+		</div>
+		<button type="button">点击我</button>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+<body>
+<script type="text/javascript" src="public.js">
+</script>
+<script type="text/javascript">
+/*
+	*一、 构造函数绑定
+	*    第一种方法也是最简单的方法，使用call或apply方法，
+	* 	  将父对象的构造函数绑定在子对象上，即在子对象构造函数中加一行
+ * */
+
+function Cat(name , color){
+	Animal.apply(this , arguments);
+	this.name = name;
+	this.color = color;
+}
+console.log(Cat)
+var cat1 = new Cat("大毛" , "黄色");
+alert(cat1.species); // 动物
+var cat2 = new Cat("二毛" , "红色");
+alert(cat2.species);
+
+console.log(cat1);
+</script>
+		
+</body>
+</html>

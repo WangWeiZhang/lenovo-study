@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0px;
+				padding:0px;
+			}
+			.box{
+				width: 80%;
+				height:200px;
+				border: 1px solid #B8860B;
+				margin:0 auto;
+			}
+			h1{
+				text-align: center;
+			}
+			.box div{
+				width:200px;
+				/*height:200px;*/
+				background: #8A2BE2;
+				border: 2px solid #FFFF00;
+				box-sizing: border-box;
+				font-size: 40px;
+				color: #fff;
+			}
+			.box{
+				display: -webkit-flex;
+				display: flex;
+			}
+			.box0{
+				flex-direction:row;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<h1>flex-grow 如何分配父容器空间</h1>
+		<div class="box box0">
+			<div style=" flex-grow: 3;">flex-grow: 3;</div>
+			<div style=" flex-grow: 2;">flex-grow: 2;</div>
+			<div style=" flex-grow: 1;">flex-grow: 1;</div>
+		</div>
+		
+	</body>
+</html>

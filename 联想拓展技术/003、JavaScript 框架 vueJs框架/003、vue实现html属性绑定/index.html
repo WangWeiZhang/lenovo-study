@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue.js</title>
+	</head>
+	<link rel="stylesheet" href="css/index.css" />
+	<script src="js/vue.js"></script>
+	<body>
+		<!-- vue-app 根容器-->
+		<div id="vue-app">
+			<h1>{{adder(4,4)}} {{remove()}}</h1>
+			<p>Name : {{ name }}</p>
+			<p>Job : {{ job }}</p>
+			<a v-bind:href="website">echarts官方网站</a>
+			<input type="text" v-bind:value="website" />
+			<p v-html="aHref">试试撒多</p>
+		</div>
+
+		<script type="text/javascript" src="js/app.js">
+		</script>
+		
+		<!--
+			v-bind:属性="data中的属性名" 绑定属性
+				<a v-bind:href="website">echarts官方网站</a>
+				<input type="text" v-bind:value="website" />
+			
+			v-html:属性="data中的属性名" 类似于innerHTML
+				<p v-html="aHref">试试撒多</p>
+		-->
+	</body>
+</html>

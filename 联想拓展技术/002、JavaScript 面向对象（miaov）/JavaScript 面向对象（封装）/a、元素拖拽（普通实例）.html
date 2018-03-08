@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	#div1{
+		width:100px; height: 100px; background: red; position: absolute;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var oDiv = document.getElementById("div1");
+		oDiv.onmousedown = function(e){
+			var oEvent = e || event;
+			var disX = oEvent.clientX - oDiv.offsetLeft;
+			var disY = oEvent.clientY - oDiv.offsetTop;
+			
+		    oDiv.onmousemove = function(e){
+		    	var oEvent = e||event;
+		    	console.log(oEvent.clientX - disX);
+				
+		    	oDiv.style.left = oEvent.clientX - disX + "px";
+		    	oDiv.style.top = oEvent.clientY - disY + "px";
+		    }
+		    
+		    document.onmouseup = function(){
+		    	document.onmousemove = null;
+		    	document.onmouseup = null;
+		    }
+		}
+	}
+</script>
+</head>
+<body>
+	<div id = "div1"></div>
+</body>
+</html>

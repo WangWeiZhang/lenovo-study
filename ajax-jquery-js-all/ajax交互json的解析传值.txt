@@ -1,0 +1,69 @@
+
+/*
+	一、stringify()用于从一个对象解析出字符串，如
+	
+	var a = {a:1,b:2}
+	
+	结果：
+	
+	JSON.stringify(a)
+	
+	"{"a":1,"b":2}"
+*/
+
+/*
+	二、parse用于从一个字符串中解析出json对象,如
+	
+	var str = '{"name":"huangxiaojian","age":"23"}'
+	结果：
+	JSON.parse(str)
+
+	Object
+
+	age: "23"
+	name: "huangxiaojian"
+	__proto__: Object
+
+	注意：单引号写在{}外，每个属性名都必须用双引号，否则会抛出异常。
+
+*/
+/*
+	三、jquery ajax  - serializeArray() 方法(表单序列化)；
+	   http://www.w3school.com.cn/jquery/ajax_serializearray.asp
+	描述：能够将form表单中的提交内容提取出来序列化程json对象的格式
+	
+	示例：
+		//筛选form表单提交的 name和value的值形成json的键值对
+		function serializeObject(form) {
+			var o = {};
+			var a = form.serializeArray();
+			$.each(a, function() {
+				if (o[this.name]) {
+					if (!o[this.name].push) {
+						o[this.name] = [ o[this.name] ];
+					}
+					o[this.name].push(this.value || '');
+				} else {
+					o[this.name] = this.value || '';
+				}
+			});
+			return o;
+		}
+		
+		var options = {
+				url : config.basePath + '/accessChannel',
+				type : 'post',
+				contentType : 'application/json',
+				//stringify()将json对象改写成json字符串的格式
+				data :JSON.stringify(serializeObject($("#deviceForm"))),
+				dataType : "json",
+				success : function(data) {
+					console.log("3.1、options.success:function(){accessChannel接口访问成功}");
+					reportCharts.drawChart(data);
+				},
+				error : function(){
+					console.log("3.2、options.error:function(){}accessChannel接口访问失败");
+				} 
+		};
+		$.ajax(options);
+*/

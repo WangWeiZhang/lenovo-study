@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="ecahrts" style="width:1920px; height:500px">
+			
+		</div>
+	</body>
+	<script src="js/echarts.js"></script>
+	<script type="text/javascript">
+		test();
+		function test(){
+			var myChart = echarts.init(document.getElementById('ecahrts'));
+			
+			option = {
+			   
+			    legend: {
+			        data:[ '预购队列']
+			    },
+			    
+			    dataZoom: {
+			        show: false,
+			        start: 0,
+			        end: 100
+			    },
+			    xAxis: [
+			        {
+			            type: 'category',
+			            boundaryGap: true,
+			            data: ["12pm","1pm","2pm","3pm","4pm","5pm","6pm","7pm","8pm","9pm","10pm","11pm","12am","1am","2am","3am","4am","5am","6am","7am","8am","9am","10am","11am"]
+			        }
+			    ],
+			    yAxis: [
+			        
+			        {
+			            type: 'value',
+			            scale: true,
+			            name: '预购量',
+			            boundaryGap: [0.2, 0.2],
+			            min:0
+			        }
+			    ],
+			    series: [
+			        {
+			            name:'预购队列',
+			            type:'bar',
+			            data:[10,20,30,40,50,60,70,80,90,100,10,20,30,40,50,60,70,80,90,100,87,56,34,53]
+			        }
+			    ]
+			};
+			
+
+			setInterval(function (){
+			    var data0 = option.series[0].data;
+			    data0.shift();
+			    data0.push(Math.round(Math.random() * 100));
+			    last =  option.xAxis[0].data.shift();
+			    option.xAxis[0].data.push(last);
+			
+			    myChart.setOption(option);
+			}, 2000);
+
+			
+//			$(window).resize(function(){
+//        		myChart.resize();    
+//       	}); 
+        	
+		}
+		
+		
+	</script>
+</html>

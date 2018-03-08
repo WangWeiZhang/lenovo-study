@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id='box'>理解不同情况的this</div>
+	</body>
+</html>
+
+<script>
+	var arr = [1,2,3,4,5];
+	
+	//this 当前的方法属于谁
+	arr.show = function(){
+		alert(this);// 1,2,3,4,5
+	}
+	
+	document.getElementById("box").onclick = function(){
+		alert(this);
+	}
+	
+	arr.show();
+	//在过去 我们给一个对象添加事件，本质上是给一个对象添加一个方法
+	
+	//-------------------------------------------------------------
+
+	//但是我们现在是在给一些本地对象扩展方法,因为本身还会有方法属性,所以为了避免冲突我们需要使用object创建对象（想要了解如何创建请看 3）
+	
+</script>

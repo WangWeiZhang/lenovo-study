@@ -1,0 +1,49 @@
+1、css控制空格（&nbsp;）的间距
+    https://www.cnblogs.com/tianma3798/p/4930253.html
+	
+	名称	  编号	        描述
+	&nbsp;	  &#160;	不断行的空白（1个字符宽度）
+	&ensp;	  &#8194;	半个空白（1个字符宽度）
+	&emsp;	  &#8195;	一个空白（2个字符宽度）
+	&thinsp;  &#8201;	窄空白（小于1个字符宽度）
+	
+2、个人常用rem对照表
+
+	1rem = 18.75px;
+
+	4rem = 0.213rem;
+
+	6rem = 0.32rem;
+
+	8rem = 0.427rem;
+
+	9rem = 0.48rem;
+
+	10rem = 0.533rem;
+
+	12px = 0.64rem;
+
+	13px = 0.693rem;
+
+	16px = 0.853rem;
+
+	18px = 0.96rem;
+
+	20px = 1.07rem;
+	
+	23px = 1.227rem;
+
+	24px = 1.28rem;
+
+	30px = 1.6rem;
+
+	32px = 1.707rem;
+
+	35px = 1.867rem;
+
+	56px = 2.987rem;
+	
+	
+	
+	
+

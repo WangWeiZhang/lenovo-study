@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+
+<script>
+		function createPerson(name , sex){   //构造函数
+	
+		//var  this = new Object(); 使用new 操作符 系统会在构造函数自己创建一个 new object();
+		
+		this.name = name;
+		this.sex = sex;
+		
+		this.showName = function(){
+			alert(this.name);
+		}
+		
+		this.showSex = function(){
+			alert(this.sex);
+		}
+		
+		//return this;  //也会默认给返回 new object();
+		}
+		
+		var person1 =new createPerson("Blue" , "男");
+		var person2 =new createPerson("Top" , "女");
+		
+		alert(person1.showName == person2.showName);//false  还是两个函数浪费内存
+		
+		//总结：1、使用了new操作符解决了 在这里我们都可以通过this统一指向当前实例化对象。
+		//		2、也解决了，没有使用new操作符的缺点。
+		//		3、但是 两个实例对象的相同方法，还是属于两块不同的地址，所以浪费资源内存的缺陷还是没有解决
+		//		4、如何解决？ 请看（8、使用原型和构造函数的混合写法创建对象）
+		//		注意：在看8的之前，需要先看一看6、7的demo，才能得知我们使用原型能够做到什么。有一个初步的了解
+</script>

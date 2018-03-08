@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1 input , #div2 input, #div3 input , #div4 input{background:#ccc;}
+			#div1 .active , #div2 .active , #div3 .active , #div4 .active{background:yellow;}
+			#div1 div , #div2 div , #div3 div , #div4 div{
+				width: 200px;
+				height:200px;
+				background: #ccc;
+				display: none;
+			} 
+			
+		</style>
+		
+<script>
+window.onload = function(){
+	var oTab1 =  new CreateTab("div1" , "input" , "div");
+	var oTab2 =  new CreateTab("div2" , "input" , "div");
+	var oTab3 =  new CreateTab("div3" , "input" , "div");
+	var oTab4 =  new CreateTab("div4" , "input" , "div");
+}
+
+function CreateTab(id , btnElement , textElement){
+	var oDiv = document.getElementById(id);
+	var _this = this;
+	this.aBtn = oDiv.getElementsByTagName(btnElement);
+	this.aDiv = oDiv.getElementsByTagName(textElement);
+	
+	for(var i=0; i<this.aBtn.length; i++){
+		this.aBtn[i].index = i;
+		this.aBtn[i].onclick = function(e){
+			_this.tab(this);
+		};
+	}
+}
+
+CreateTab.prototype.tab = function(oBtn){
+	for(var j=0; j<this.aBtn.length; j++){
+		this.aBtn[j].className = "";
+		this.aDiv[j].style.display = "none";
+	}
+	oBtn.className = "active";
+	this.aDiv[oBtn.index].style.display = "block";
+}
+</script>
+	</head>
+	<body>
+		<div id="div1">
+			<input class='active' type="button" value = "教育">
+			<input type="button" value = "财经">
+			<input type="button" value = "体育">
+			
+			<div style='display: block;'>哈哈哈大声道啊大大大神</div>
+			<div >加大爱上 萨达‘了萨达add丰富的规划</div>
+			<div >萨达撒多阿萨德阿达阿萨德阿萨德sa</div>
+		</div>
+		
+		<div id="div2">
+			<input class='active' type="button" value = "教育">
+			<input type="button" value = "财经">
+			<input type="button" value = "体育">
+			
+			<div style='display: block;'>哈哈哈大声道啊大大大神</div>
+			<div >加大爱上 萨达‘了萨达add丰富的规划</div>
+			<div >萨达撒多阿萨德阿达阿萨德阿萨德sa</div>
+		</div>
+		
+		<div id="div3">
+			<input class='active' type="button" value = "教育">
+			<input type="button" value = "财经">
+			<input type="button" value = "体育">
+			<input type="button" value = "cba">
+			<input type="button" value = "nba">
+			
+			<div style='display: block;'>哈哈哈大声道啊大大大神</div>
+			<div >加大爱上 萨达‘了萨达add丰富的规划</div>
+			<div >萨达撒多阿萨德阿达阿萨德阿萨德sa</div>
+			<div >易建联死了</div>
+			<div >科比死了</div>
+		</div>
+		
+		<div id="div4">
+			<input class='active' type="button" value = "教育">
+			<input type="button" value = "财经">
+			<input type="button" value = "体育">
+			
+			<div style='display: block;'>哈哈哈大声道啊大大大神</div>
+			<div >加大爱上 萨达‘了萨达add丰富的规划</div>
+			<div >萨达撒多阿萨德阿达阿萨德阿萨德sa</div>
+		</div>
+	</body>
+</html>

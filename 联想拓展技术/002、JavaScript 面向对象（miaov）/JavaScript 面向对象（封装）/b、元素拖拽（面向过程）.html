@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	#div1{
+		width:100px; height: 100px; background: red; position: absolute;
+	}
+</style>
+<script>
+	//这是一个简单的封装， 用的是我们面向过程的方法实现的。 
+	var oDiv = null;
+	var disX = 0;
+	var disY = 0;
+	window.onload = function(){
+		oDiv = document.getElementById("div1");
+		oDiv.onmousedown = fndown;
+	}
+	function fndown(e){
+		var oEvent = e || event;
+		disX = oEvent.clientX - oDiv.offsetLeft;
+		disY = oEvent.clientY - oDiv.offsetTop;
+	    document.onmousemove = fnmove;
+	    document.onmouseup = fnup;
+	}
+	
+	function fnmove(e){
+    	var oEvent = e||event;
+    	console.log(oEvent.clientX - disX);
+		
+    	oDiv.style.left = oEvent.clientX - disX + "px";
+    	oDiv.style.top = oEvent.clientY - disY + "px";
+    }
+	
+	function fnup(){
+    	document.onmousemove = null;
+    	document.onmouseup = null;
+    }
+</script>
+</head>
+<body>
+	<div id = "div1"></div>
+</body>
+</html>

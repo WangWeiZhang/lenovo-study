@@ -1,0 +1,17 @@
+#canvas{
+    width: 600px;
+    padding: 100px;
+    text-align: center;
+    border: 1px solid #ccc;
+    color: red;
+    font-size: 100px;
+    float: left;
+}
+#age{
+    color: #0000FF;
+    font-size: 100px;
+    float: left;
+    width: 200px;
+    border: 1px solid #000;
+    margin: 0;
+}

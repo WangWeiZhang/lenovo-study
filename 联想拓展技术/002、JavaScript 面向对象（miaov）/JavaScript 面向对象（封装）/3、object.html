@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原始的方式创建对象</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//原始的方式创建对象
+	var obj = new Object();
+	
+	obj.name = "王维璋";
+	obj.sex = "男";
+	
+	obj.showName = function(){
+		alert(this.name);
+	}
+	
+	obj.showSex = function(){
+		alert(this.sex);
+	}
+	
+	obj.showName();
+	obj.showSex();
+	
+	/*
+	 缺点：
+	 	1、创建一个对象，写的是死的属性值和方法;
+	 	2、如果创建多个对象，会造成强烈的代码冗余。麻烦
+	 	3、如果有很多个对象，并不能快速清楚的看出，这些对象之间的联系。
+	 * */
+	
+	
+	//总结： 原始方式创建对象，解决了，有可能冲突js本地对象的bug。
+	//		但是创建多个对象的时候，代码繁琐比较冗余，如何解决呢？ （请看 4、工厂方式创建对象）
+</script>

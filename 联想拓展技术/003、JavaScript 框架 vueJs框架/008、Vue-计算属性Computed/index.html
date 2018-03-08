@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Cumputed 计算属性</title>
+		<script type="text/javascript" src="../vue.js">
+		</script>
+	</head>
+	<body>
+		<h1>Cumputed 计算属性 与 性能讨论(打开chrome V8 查看两个实例的函数调用方式，比较methods 和 cumputed的区别)</h1>
+		
+		<div id="vue-app1">
+			<p>一、通过触发事件调用 Methods中的方法</p>
+			<button v-on:click="a++">Add to A</button>
+			<button v-on:click="b++">Add to B</button>
+			<p>A - {{a}}</p>
+			<p>B - {{b}}</p>
+			<p>Age - {{age}}</p>
+			<p>Age + A = {{addToA()}}</p>
+			<p>Age + B = {{addToB()}}</p>
+			<p>总结：每次a或者b的属性值改变，他都会执行所有方法，这样比较浪费内存，性能不是很好。</p>
+		</div>
+		
+		<div style="background:red; height:2px;"></div>
+		
+		<div id="vue-app2">
+			<p>二、通过触发事件调用  cumputed 中的方法</p>
+			<button v-on:click="a++">Add to A</button>
+			<button v-on:click="b++">Add to B</button>
+			<p>A - {{a}}</p>
+			<p>B - {{b}}</p>
+			<p>Age - {{age}}</p>
+			<p>Age + A = {{addToA}}</p>
+			<p>Age + B = {{addToB}}</p>
+			<p>总结：计算属性更加的优化了，什么时候使用：比如搜索的时候，变化幅度比较大的时候，dom不同的时候。</p>
+			<p>在vue中使用虚拟dom，改变时候，是将现有的dom拷贝过去和前一个作比较，有改变执行，没有改变不会执行。</p>
+			<p>但是并不是所有的函数调用都使用computed创建方法，要根据场景使用</p>
+		</div>
+		
+		<div style="background:red; height:2px;"></div>
+		
+		<h4></h4>
+		
+		
+	</body>
+	
+	<script type="text/javascript">
+		
+		new Vue({
+			el:"#vue-app1",
+			data:{
+				a:0,
+				b:0,
+				age:20
+			},
+			methods:{
+				addToA:function(){
+					console.log("methods的 addToA方法以执行")
+					return this.age+this.a;
+				},
+				addToB:function(){
+					console.log("methods的 addToB方法以执行")
+					return this.age+this.b;
+				}
+			}
+		})
+		
+		new Vue({
+			el:"#vue-app2",
+			data:{
+				a:0,
+				b:0,
+				age:20
+			},
+			computed:{
+				addToA:function(){
+					console.log("addToA方法以执行")
+					return this.age+this.a;
+				},
+				addToB:function(){
+					console.log("addToB方法以执行")
+					return this.age+this.b;
+				}
+			}
+		})
+		
+	</script>
+</html>

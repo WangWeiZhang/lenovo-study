@@ -1,0 +1,79 @@
+
+
+（1）、echarts 多组数据的series 和 legend 的处理方式
+	var data = 
+		[
+			{
+				"accessChannel":"Wechat",
+				"accessChannelNum":[
+					2417,
+					2373
+				],
+				"accessChannelTime":[
+					"2017-10-01",
+					"2017-10-02"
+				]
+			},
+			{
+				"accessChannel":"Web",
+				"accessChannelNum":[
+					2432,
+					2475
+				],
+				"accessChannelTime":[
+					"2017-10-01",
+					"2017-10-02"
+				]
+			},
+			{
+				"accessChannel":"Facebook",
+				"accessChannelNum":[
+					2348,
+					2347
+				],
+				"accessChannelTime":[
+					"2017-10-01",
+					"2017-10-02"
+				]
+			}
+		]
+
+		var legendData = []; //动态图例数组
+		var series = [];    // 动态series数组
+		
+		//循环 请求回来的数据 处理 想要的格式
+		$.each(data , function(index , value){
+			legendData.push(data[index].accessChannel);
+			series.push({
+				name:legendData[index],
+				type:'line',
+				stack: '总量',
+				areaStyle: {normal: {}},
+				data:data[index].accessChannelNum
+			})
+		})
+		
+		console.log(legendData);
+		console.log(series);
+
+	例如： 联想 report项目 reportCharts.js and VisitChannel()方法
+
+（2）、（echarts堆叠柱形图-动态）从数组1和数组2中找规律， 已知数组1的数据，怎么根据规律，处理出数组2的一组数据存起来。
+		a ==== [12,2,3,4,1,2];   b === [0 , 10 , 7 , 3 , 2 , 0];
+		//实例：
+		var a=[12,2,3,4,1,2];
+		var numLen = a.length - 2;
+		var c = a.slice(2,a.length);
+		var num=0;
+		var b=[0];
+		for(var j=0; j<=numLen;j++){
+			for(var i=0; i<c.length; i++){
+				num = num+c[i];
+			}
+			c.shift();
+			b.push(num);
+			num = 0;
+		}
+		console.log(data.countryNumList);
+		console.log(senDataCountryNumlist);
+	例如： 联想 report项目 reportCharts.js and VisitNumber()方法 堆积柱形图 规律和画图	

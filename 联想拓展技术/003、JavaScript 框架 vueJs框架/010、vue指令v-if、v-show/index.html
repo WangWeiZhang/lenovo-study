@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue动态改变css样式</title>
+		<link rel="stylesheet" type="text/css" href="index.css"/>
+		<script src="../vue.js"></script>
+	</head>
+	<body>
+		<div id='vue-app'>
+			<h1> v-if 条件 </h1>
+			
+			<div>
+				<p>一、连接断开网络</p>
+				<button v-on:click="success = true">连接网络</button>
+				<button v-on:click="success = false">断开网络</button>
+				
+				<p v-if="success">网络连接成功，返回代码 200。</p>
+				<p v-if="error">网络连接失败，返回代码 404。</p>
+			</div>
+			
+			<div>
+				<p>二、true显示false不显示，二者没有相互影响</p>
+				<button v-on:click="successA = !successA">successA: {{successA}}</button>
+				<button v-on:click="errorA = !errorA">errorA: {{errorA}}</button>
+				
+				<p v-if="successA">网络连接成功，返回代码 200。</p>
+				<p v-if="errorA">网络连接失败，返回代码 404。</p>
+			</div>
+			
+			<div>
+				<p>三、判断successB是否为true，是的话显示，终止。不是的话判断error是否为true，是的话显示不是的话不显示。二者只能显示一个</p>
+				<button v-on:click="successB = !successB">successB: {{successB}}</button>
+				<button v-on:click="errorB = !errorB">errorB: {{errorB}}</button>
+				
+				<p v-if="successB">网络连接成功，返回代码 200。</p>
+				<p v-else-if="errorB">网络连接失败，返回代码 404。</p>
+			</div>
+		</div>
+		
+		<div id='vue-app1'>
+			<h1> v-show 指令 </h1>
+			
+			<div>
+				<p>一、连接断开网络</p>
+				<button v-on:click="success = !success">连接网络{{success}}</button>
+				<button v-on:click="error = !error">断开网络{{error}}</button>
+				
+				<p v-show="success">网络连接成功，返回代码 200。</p>
+				<p v-show="error">网络连接失败，返回代码 404。</p>
+				<p >ceshi</p>
+			</div>
+			
+		</div>
+		
+		<script>
+			new Vue({
+				el:"#vue-app",
+				data:{
+					success:false,
+					error:false,
+					successA:false,
+					errorA:false,
+					successB:false,
+					errorB:false
+				},
+				methods:{
+					
+				},
+				computed:{
+					
+				}
+			})
+			
+			new Vue({
+				el:"#vue-app1",
+				data:{
+					success:false,
+					error:false
+				},
+				methods:{
+					
+				},
+				computed:{
+					
+				}
+			})
+			
+		</script>
+	</body>
+</html>

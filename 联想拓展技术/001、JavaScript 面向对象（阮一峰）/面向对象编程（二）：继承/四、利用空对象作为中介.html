@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>四、利用空对象作为中介</title>
+		<!--
+	//现在，我们先将Animal对象改写：
+	function Animal(){}
+	Animal.prototype.species = "动物";
+	Animal.prototype.yanjing = "两个";
+	
+	//对象 猫
+	function Cat(name , color){
+		this.name = name;
+		this.color = color;
+	}
+	
+	//由于"直接继承prototype"存在上述的缺点，所以就有第四种方法，利用一个空对象作为中介。
+	var f = function(){  }
+	f.prototype = Animal.prototype;
+	Cat.prototype = new f();
+	Cat.prototype.constructor = Cat;
+	//F是空对象，所以几乎不占内存。这时，修改Cat的prototype对象，就不会影响到Animal的prototype对象。
+	alert(Animal.prototype.constructor); // Animal
+			
+			
+			
+		-->
+	</head>
+<body>
+<script type="text/javascript">
+	
+	
+	
+	//我们将上面的方法，封装成一个函数，便于使用。
+
+	function extend(Child , Parent){
+		var F = function(){};
+		F.prototype = Parent.prototype;
+		Child.prototype = new F();
+		Child.prototype.constructor = Child;
+		Child.uber = Parent.prototype;
+	}
+	
+	function Animal(){};
+	Animal.prototype.species = "动物";
+	
+	function Cat(name , color){
+		this.name = name;
+		this.color = color;
+	}
+	
+	extend(Cat , Animal);
+	var cat1 = new Cat("大毛" , "黄色");
+	console.log(""+cat1.name+"的名字叫：" + cat1.name);
+	console.log(""+cat1.name+"的颜色为：" + cat1.color);
+	console.log(""+cat1.name+"的种类是：" + cat1.species);
+	
+	
+	
+	
+</script>
+</body>
+</html>

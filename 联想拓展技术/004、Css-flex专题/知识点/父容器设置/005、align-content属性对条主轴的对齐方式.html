@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0px;
+				padding:0px;
+			}
+			body{
+				padding-top: 20px;
+			}
+			.box{
+				width: 600px;
+				height:300px;
+				border: 1px solid #B8860B;
+				margin:0 auto;
+			}
+			.box div{
+				width:100px;
+				height: 100px;
+				background: #8A2BE2;
+				border: 2px solid #FFFF00;
+				box-sizing: border-box;
+				font-size: 40px;
+				color: #fff;
+			}
+			
+			h3{
+				text-align: center;
+			}
+			.box{
+				display: -webkit-flex;
+				display: flex;
+			}
+			.box0{
+				flex-wrap: wrap;
+				align-content: flex-start;
+			}
+			.box1{
+				flex-wrap: wrap;
+				align-content: flex-end;
+			}
+			
+			.box2{
+				flex-wrap: wrap;
+				align-content: center;
+			}
+			
+			.box3{
+				flex-wrap: wrap;
+				align-content: stretch;
+			}
+			.box3 div{
+				width: 100px;
+				height: auto;
+			}
+			
+			.box4{
+				flex-wrap: wrap;
+				align-content: space-between;
+			}
+			
+			.box5{
+				flex-wrap: wrap;
+				align-content: space-around;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<h3>flex-wrap: wrap;顺序换行 align-content: flex-start; 所有主轴顶部对齐</h3>
+		<div class="box box0"> 
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+		</div>
+		<h3>flex-wrap: wrap;顺序换行 align-content: flex-end; 所有主轴底部对齐</h3>
+		<div class="box box1">
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+		</div>
+		<h3>flex-wrap: wrap;顺序换行 align-content:center; 所有主轴居中对齐</h3>
+		<div class="box box2">
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+		</div>
+		
+		<h3>flex-wrap: wrap;顺序换行 align-content: stretch; 如果不设置高度 所有主轴占满整个盒子</h3>
+		<div class="box box3">
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+		</div>
+		
+		<h3>flex-wrap: wrap;顺序换行align-content: space-between; 主轴两端对齐，</h3>
+		<div class="box box4">
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			
+		</div>
+		
+		<h3>flex-wrap: wrap;顺序换行align-content: space-around; 主轴两侧边距相等，之间的边距是两侧的2倍</h3>
+		<div class="box box5">
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+			<div>1</div><div class="spdiv">2</div><div>3</div>
+		</div>
+	</body>
+</html>

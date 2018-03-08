@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>五、Prototype模式</title>
+	</head>
+	<body>
+		
+		
+	<script type="text/javascript">
+		/*
+		 Javascript规定，每一个构造函数都有一个prototype属性，指向另一个对象。
+		 这个对象的所有属性和方法，都会被构造函数的实例继承。
+		 * */
+		
+		//这意味着，我们可以把那些不变的属性和方法，直接定义在prototype对象上。
+	　　function Cat(name,color){
+	　　　　this.name = name;
+	　　　　this.color = color;
+	　　}
+	　　Cat.prototype.type = "猫科动物";
+	　　Cat.prototype.eat = function(){alert("吃老鼠")};
+		
+		//然后，生成实例。
+	　　var cat1 = new Cat("大毛","黄色");
+	　　var cat2 = new Cat("二毛","黑色");
+	　　alert(cat1.type); // 猫科动物
+	　　cat1.eat(); // 吃老鼠
+	
+		//这时所有实例的type属性和eat()方法，其实都是同一个内存地址，指向prototype对象，因此就提高了运行效率。
+		alert(cat1.eat == cat2.eat); //true
+	</script>
+		
+		
+		
+	</body>
+</html>

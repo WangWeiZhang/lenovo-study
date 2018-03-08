@@ -1,0 +1,114 @@
+（1）、jquery的paste事件用法简单介绍:
+	首先说明一点，paste事件并不符合w3c标准，
+	但确实非常的好用，并且浏览器兼容性也很好。
+	所以对于它的掌握还是十分有必要的，下面就介绍一下它的用法,希望对大家有所帮助。
+
+	paste事件会在通过键盘快捷键黏贴或者使用鼠标右键黏贴的时候触发。
+
+	$(function(){     
+	  $(".NumText").bind("paste",function(){
+		alert("事件触发！")    
+	  })
+	});  
+（2）、jquery ajax  - serializeArray() 方法(表单序列化)；
+	http://www.w3school.com.cn/jquery/ajax_serializearray.asp
+	描述：能够将form表单中的提交内容提取出来序列化程json对象的格式
+	
+	示例：
+	//筛选form表单提交的 name和value的值形成json的键值对
+	function serializeObject(form) {
+		var o = {};
+		var a = form.serializeArray();
+		$.each(a, function() {
+			if (o[this.name]) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	}
+	var options = {
+			url : config.basePath + '/accessChannel',
+			type : 'post',
+			contentType : 'application/json',
+			//stringify()将json对象改写成json字符串的格式
+			data :JSON.stringify(serializeObject($("#deviceForm"))),
+			dataType : "json",
+			success : function(data) {
+				console.log("3.1、options.success:function(){accessChannel接口访问成功}");
+				reportCharts.drawChart(data);
+			},
+			error : function(){
+				console.log("3.2、options.error:function(){}accessChannel接口访问失败");
+			} 
+	};
+	$.ajax(options);
+（3）判断option是否被选中
+
+	$("#id").is(":checked")//为false时是未被选中的，为true时是被选中   //jquery 1.9以上支持
+	$("#id").attr('checked')==undefined//为false时是未被选中的，为true时是被选中  //jquery 1.5  -1.7 等 老版本支持
+
+（4）获取select选中的值
+	
+	$("#mySelect option:selected").text()
+	$("#mySelect").find('option:selected').text()
+	$("#mySelect").val();
+
+（5）获取select选中的索引
+
+	$("#mySelect").get(0).selectedindex
+	
+（6）添加option 删除option
+
+	$("#mySelect").append("<option value="+value+">"+text+"<option>"); //添加
+
+	$("#myOption").remove() //删除
+（7）jquery滚动条
+		/* 回到顶部 */
+	    $(function() {
+			$(function() {
+			 $(window).scroll(function() {
+				      /* 判断滚动条 距离页面顶部的距离 100可以自定义*/
+					  if($(window).scrollTop() > 100) {
+					   $("#top_sec").fadeIn(100); /* 这里用.show()也可以 只是效果太丑 */
+					  } else {
+					   $("#top_sec").fadeOut(100);
+					  }
+				 });
+			});
+			/* 给图片元素绑定 回到顶部的事件 */
+			$(function() {
+				 $("#goPageTop").on("click", function() {
+					  $('body,html').animate({
+					   scrollTop: 0
+					  }, 1000);
+					  return false;
+				 });
+			});
+	    });
+（8）jquery 按下标选择元素
+			$(".commentList-inner ul:lt(4)").css({"border-bottom":"5px solid #22212f"});
+			$(".commentList-inner ul:gt(3)").css({"border-top":"5px solid #22212f"});
+
+（9）、jquery each循环一次， 睡眠2秒 （for循环一秒执行一次）
+		
+			//jquery each获得页面所有的 li 然后遍历所有的li 让li的索引 每隔两秒加到对应的li中
+			$(document).ready(function () {
+				$.each( $("#a1 li") , function (i, item) {
+					setTimeout("$('#a1 li').eq(" + i + ").html(" + i + ")", i * 2000);
+				});
+			});
+			//其实setTimeout只执行一次， 根据下标将所有的li都绑定了 索引*2000ms的时间
+			//所以，每隔li之间的 执行调用时间，相差2000。 从真正意义上并不是让for循环变慢了。而是延迟执行了for循环的元素
+			<div id="a1">
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>

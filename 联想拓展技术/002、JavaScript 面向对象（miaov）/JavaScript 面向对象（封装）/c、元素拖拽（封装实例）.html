@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	#div1{
+		width:100px; height: 100px; background: red; position: absolute;
+	}
+	#div2{
+		width:100px; height: 100px; background: yellow; position: absolute;
+	}
+	#div3{
+		width:100px; height: 100px; background: blue; position: absolute;
+	}
+	#div4{
+		width:100px; height: 100px; background: darkgreen; position: absolute;
+	}
+	#div5{
+		width:100px; height: 100px; background: darkcyan; position: absolute;
+	}
+	#div6{
+		width:100px; height: 100px; background: bisque; position: absolute;
+	}
+	#div7{
+		width:100px; height: 100px; background: darkgoldenrod; position: absolute;
+	}
+	#div8{
+		width:100px; height: 100px; background: yellowgreen; position: absolute;
+	}
+	#div9{
+		width:100px; height: 100px; background: blueviolet; position: absolute;
+	}
+	#div10{
+		width:100px; height: 100px; background: orange; position: absolute;
+	}
+</style>
+<script>
+	//使用面向对象拖拽的话我们要考虑
+	//1、onload改成构造函数
+	//2、全局变量 改成对象的属性
+	//3、函数改成对象的方法
+	//4、将构造函数的形参添加上以便多个实例使用
+	//5、this的添加  注意this的指向，多测试如果有 定时器和事件那么 使用 var _this = this; 多加一层
+	//6、实例化对象，传参数。
+	window.onload = function(){
+		var obj1 = new ClientXYelement("div1");
+		var obj2 = new ClientXYelement("div2");
+		var obj3 = new ClientXYelement("div3");
+		var obj4 = new ClientXYelement("div4");
+		var obj5 = new ClientXYelement("div5");
+		var obj6 = new ClientXYelement("div6");
+		var obj7 = new ClientXYelement("div7");
+		var obj8 = new ClientXYelement("div8");
+		var obj9 = new ClientXYelement("div9");
+		var obj10 = new ClientXYelement("div10");
+	}
+	
+	function ClientXYelement(id){
+		var _this = this;
+		this.disX = 0;
+		this.disY = 0;
+		this.oDiv = document.getElementById(id);
+		this.oDiv.onmousedown =function(){
+			_this.fndown();
+			return false;
+		}
+	}
+	ClientXYelement.prototype.fndown = function(e){
+		var _this = this;
+		var oEvent = e || event;
+		this.disX = oEvent.clientX - this.oDiv.offsetLeft;
+		this.disY = oEvent.clientY - this.oDiv.offsetTop;
+	    document.onmousemove = function(){
+	    	_this.fnmove()
+	    	return false;
+	    };
+	    document.onmouseup = function(){
+	    	_this.fnup()
+	    	return false;
+	    };
+	}
+	
+	ClientXYelement.prototype.fnmove = function (e){
+    	var oEvent = e||event;
+    	
+    	this.oDiv.style.left = oEvent.clientX - this.disX + "px";
+    	
+    	this.oDiv.style.top = oEvent.clientY - this.disY + "px";
+    }
+	
+	ClientXYelement.prototype.fnup = function (){
+    	document.onmousemove = null;
+    	document.onmouseup = null;
+    }
+</script>
+</head>
+<body>
+	<div id = "div1"></div>
+	<div id = "div2"></div>
+	<div id = "div3"></div>
+	<div id = "div4"></div>
+	<div id = "div5"></div>
+	<div id = "div6"></div>
+	<div id = "div7"></div>
+	<div id = "div8"></div>
+	<div id = "div9"></div>
+	<div id = "div10"></div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue动态改变css样式</title>
+		<link rel="stylesheet" type="text/css" href="index.css"/>
+		<script src="../vue.js"></script>
+	</head>
+	<body>
+		<div id='vue-app'>
+			<h1>动态 CSS Class</h1>
+			
+			<h2>示例 1</h2>
+			<div v-bind:class="{changeColorOne:changeColorOne}" v-on:click="changeColorOne = !changeColorOne">
+				<span>点击我改变颜色</span><i>v-on:click="changeColorOne = {{changeColorOne}}"</i>
+			</div>
+			<p>总结：绑定class方法 v-bind:class="{changeColorOne:changeColorOne}" 双引号中是个对像</p>
+			<p>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				key是class名称，value是布尔值，true添加类，false不添加
+			</p>
+			
+			
+			<h2>示例 2</h2>
+			<button v-on:click="changeColorTwo = !changeColorTwo">点我  添加颜色类，v-on:click="changeColorTwo = {{changeColorTwo}}"></button>
+			<br />
+			<button v-on:click="changeLengthTwo = !changeLengthTwo">点我添加长度，v-on:click="changeLengthTwo：{{changeLengthTwo}}"</button>
+			<div v-bind:class="compClasses">
+				<span>点击上方按钮 添加颜色类和长度类</span>
+			</div>
+			<p>总结：既然v-bind:class="{object}" 我们可以将引号中写成方法，进行调用，在方法中使用return {将其返回}</p>
+			<p>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				并且在触发 对象value的 true或false时，对原有的布尔值取反即可。<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				这样可以一次添加多个动态类，并进行动态操作
+			</p>
+		</div>
+		
+		<script>
+			new Vue({
+				el:"#vue-app",
+				data:{
+					changeColorOne:false,
+					changeLengthOne:false,
+					changeColorTwo:false,
+					changeLengthTwo:false
+				},
+				methods:{
+					
+				},
+				computed:{
+					//计算属性常用对象，函数变动大的时候常用
+					compClasses:function(){
+						return {
+							changeColorTwo:this.changeColorTwo,
+							changeLengthTwo:this.changeLengthTwo
+						}
+						
+					}
+				}
+			})
+			
+		</script>
+		<!--
+			用到的知识点：
+				1、v-bind指令 ： 动态绑定html属性
+				2、v-bind:class： 动态绑定class  属性值是对象{class名:class值true/false}
+				3、v-on 指令：绑定事件
+				
+				4、computed 对象： vue的计算属性，值为一个对象，对象中可以编写方法。需要大量改变的，执行computed。需要注意，调用不适用括号。
+				
+		-->
+	</body>
+</html>

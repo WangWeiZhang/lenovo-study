@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>存在子类扩展，会影响父类的情况。所以有问题，不建议使用，但是需要了解问题所在</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+	//父类
+	function Person(name , sex){
+		this.name = name;
+		this.sex = sex;
+	}
+	
+	Person.prototype.showName = function(){
+		alert("我的名字叫"+this.name);
+	}
+	Person.prototype.showSex = function(){
+		alert("我的性别是"+this.sex+"的");
+	}
+	
+	/*-------------------------------------*/
+	//子类
+	function Worker(name , sex , job){
+		//this是worker对象
+		//构造函数伪装后传给person，让person以为这个this是person，这个叫构造函数伪装。
+		Person.call(this , name , sex);  // 调用父级对象，继承属性
+		this.job = job;
+	}
+	
+	//原型链 继承 通过 直接赋值原型对象的方式。（但以下的worker.prototype的指向也随之改变了）
+	Worker.prototype = Person.prototype; //测试室友问题的，对新继承的对象做修改 会影响到父类，结果显然不对。
+	
+	//子类的新方法
+	Worker.prototype.showJob = function(){
+		alert("我的工作是"+this.job);
+	}
+	//验证子类重写 showName 是否会对父类造成影响
+	Worker.prototype.showName = function(){
+		alert("我是work的showName:"+this.name);
+	}
+	
+	var p1 = new Person("bule" , "男");
+	var p2 = new Worker("red" , "女");
+	
+	p1.showName();
+	p2.showName();
+	
+	
+	/*
+	 结果：
+	 	扩展子类的同时，父类也跟着修改了。这不是我们想要的结果，在开发中会出很多问题。
+	 	那么，是什么原因导致的？
+	 	答：3、JavaScript 引用 实例中
+	 	        我们看见， 内存地址的指向问题会导致，修改看似不同的对象，影响另一个。这就是内存地址指向的问题。
+	 	要解决这个问题，首先要让他们不是同一块内存地址。具体方式请看 5、JavaScript 继承2
+	 
+	 * */
+	
+	
+	
+</script>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	#div1{
+		width:100px; height: 100px; background: red; position: absolute;
+	}
+	#div2{
+		width:100px; height: 100px; background: yellow; position: absolute;
+	}
+	#div3{
+		width:100px; height: 100px; background: blue; position: absolute;
+	}
+	#div4{
+		width:100px; height: 100px; background: darkgreen; position: absolute;
+	}
+	#div5{
+		width:100px; height: 100px; background: darkcyan; position: absolute;
+	}
+	#div6{
+		width:100px; height: 100px; background: bisque; position: absolute;
+	}
+	#div7{
+		width:100px; height: 100px; background: darkgoldenrod; position: absolute;
+	}
+	#div8{
+		width:100px; height: 100px; background: yellowgreen; position: absolute;
+	}
+	#div9{
+		width:100px; height: 100px; background: blueviolet; position: absolute;
+	}
+	#div10{
+		width:100px; height: 100px; background: orange; position: absolute;
+	}
+</style>
+<script type="text/javascript" src="ClientXYelement.js">
+	//父类
+</script>
+<script type="text/javascript" src="LimitClientXYelement.js">	
+	//子类
+</script>
+<script>
+	
+	//使用面向对象拖拽的话我们要考虑
+	//1、onload改成构造函数
+	//2、全局变量 改成对象的属性
+	//3、函数改成对象的方法
+	//4、将构造函数的形参添加上以便多个实例使用
+	//5、this的添加  注意this的指向，多测试如果有 定时器和事件那么 使用 var _this = this; 多加一层
+	//6、实例化对象，传参数。
+	
+	window.onload = function(){
+		var obj1 = new ClientXYelement("div1");
+		var obj2 = new ClientXYelement("div2");
+		var obj3 = new LimitClientXYelement("div3");
+		var obj4 = new LimitClientXYelement("div4");
+	}
+</script>
+</head>
+<body>
+	<div id = "div1">不限制移动范围</div>
+	<div id = "div2">不限制移动范围</div>
+	<div id = "div3">限制移动范围</div>
+	<div id = "div4">限制移动范围</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+
+<script type="text/javascript">
+	var arr = [1,2,3,4,5];
+	var name = "王维璋";//自由的，全局的
+	arr.name = "王维璋";//属于一个对象的
+	
+	console.log(arr.name);
+	console.log(name);
+	
+	/*
+	 说明一个原理:
+	 	变量和属性本应该是一个东西；
+	 	但是由于所属关系，我们的命名叫法也就不同了
+	 
+	 * */
+	
+	function show(){   // 函数  ： 自由的 全局的函数属于window
+		alert("aaa")
+	}
+	
+	arr.fn = function(){  //方法 ： 属于一个对象的函数
+		alert("aaa");
+	}
+	
+	show();
+	arr.fn();
+	
+	/*
+	 说明一个原理:
+	 	函数和方法本应该是一个东西；
+	 	但是由于所属关系，我们的命名叫法也就不同了
+	 
+	 * */
+</script>

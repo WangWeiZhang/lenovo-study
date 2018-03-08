@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象在使用 事件 时this的指向问题</title>
+</head>
+<body>
+	<div id = "btn1" >点击我测试面向</div>
+<script type="text/javascript">
+	function Bbb(){
+		var _this = this;
+		this.name = "王维璋";
+		document.getElementById("btn1").onclick = function(){
+			//原理和3是一样的。 this的指向一定要注意。
+			_this.show();
+		};
+	}
+	
+	Bbb.prototype.show = function(){
+		alert(this.name);
+	}
+	
+	var obj = new Bbb();
+	
+	
+	
+</script>
+</body>
+</html>

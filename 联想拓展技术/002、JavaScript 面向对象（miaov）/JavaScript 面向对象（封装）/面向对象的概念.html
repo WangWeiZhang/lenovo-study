@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+		</script>
+	</body>
+</html>
+<!--
+	深入浅出，理解function的多个概念
+	
+	函数：独立于window的function我们叫做函数。
+	方法：属于某一个对象的，我们叫做方法。
+	事件处理函数：绑定事件，触发函数方法，我们叫做事件处理函数。
+	构造函数：构造对象的function我们叫做构造函数
+	
+	二、使用工厂方式构造对象
+	
+		function createPerson(name , sex){   //构造函数
+			//工厂原料
+			var obj = new Object();
+			
+			//原料加工
+			obj.name = name;
+			obj.sex = sex;
+			
+			obj.showName = function(){
+				alert(this.name);
+			}
+			
+			obj.showSex = function(){
+				alert(this.sex);
+			}
+			
+			//产品
+			return obj;
+		}
+		
+		var person1 = createPerson("Blue" , "男");
+		var person2 = createPerson("Top" , "女");
+		
+		工厂方式的问题，缺点：
+			a、没有看见两个对象之间的联系，看不出是否共同属于某个对象 （没使用new）
+			b、两个对象的调用的时候，都创建各自的空间，所以浪费内存，资源。（因为每次调用的时候都是一个new function）
+		
+	三、构造函数，使用new操作符定义初始化实例。
+		
+		function createPerson(name , sex){   //构造函数
+		
+			//var  this = new Object(); 使用new 操作符 系统会在构造函数自己创建一个 new object();
+			
+			this.name = name;
+			this.sex = sex;
+			
+			this.showName = function(){
+				alert(this.name);
+			}
+			
+			this.showSex = function(){
+				alert(this.sex);
+			}
+			
+			//return this;  //也会默认给返回 new object();
+		}
+		
+		var person1 =new createPerson("Blue" , "男");
+		var person2 =new createPerson("Top" , "女");
+		
+		alert(person1.showName == person2.showName);//false  还是两个函数浪费内存
+		
+	四、引出原型
+		
+		为什么使用原型？举例说明。比如，我现在有一个arr1 和 arr2 两个数组。我想给数组对象扩展一个sum求和的方法
+		
+			var arr1 = new Array(12,12,12,12);
+			var arr2 = new Array(10,10,10,10);
+			
+			arr1.sum = function(){
+				var result = 0;
+				var i = 0;
+				for(i; i<this.length; i++){
+					result = result + this[i];
+				}
+				return result;
+			}
+			
+			alert(arr1.sum());//48
+			alert(arr2.sum());//报错sum is not define
+		
+		eg:css
+		
+			class     改变一类元素的样式      应该就是我们要学的prototype
+			行间样式    改变一个元素的样式      就是给一个对象家方法或属性，就像上面的数组只给arr1添加了sum方法
+			
+			.box{ color:red; }  
+			
+			<div class="box" style = "color:green"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+		
+	五、原型对象prototype（使用原型和构造函数的混合法创建对象）
+		作用：给一类元素添加方法或者属性；
+			
+			var arr1 = new Array(12,12,12,12);
+			var arr2 = new Array(10,10,10,10);
+			
+			Array.prototype.sum = function(){
+				var result = 0;
+				var i = 0;
+				for(i; i<this.length; i++){
+					result = result + this[i];
+				}
+				return result;
+			}
+			
+			alert(arr1.sum());//48
+			alert(arr2.sum());//40
+			alert(arr1.sum == arr2.sum)//true  是一个方法，不浪费
+			
+		解释：
+			类：            月饼模子
+			对象（实例）月饼
+			
+			Array类      不具备实际功能，只能用来构造对象。
+			arr 对象    真正有功能的东西，是被类构造出来的。
+			
+			原型的一个重要的应用，就是扩展系统对象的功能。 （添加本不支持的方法和属性）
+			eg:比如扩展字符串的方法
+				//将字符创的开头和结尾的空格替换成空串
+				String.prototype.trim = function(){
+					return this.replace(/^\s+|\s+$/g , '');
+				}
+		
+		混合方式创建对象：
+		
+			function createPerson(name , sex){   //构造函数
+				this.name = name;
+				this.sex = sex;
+			}
+			createPerson.prototype.showName = function(){
+				alert(this.name);
+			}
+				
+			createPerson.prototype.showSex = function(){
+				alert(this.sex);
+			}
+			
+			var person1 =new createPerson("Blue" , "男");
+			var person2 =new createPerson("Top" , "女");
+			
+			person1.showName();
+			person2.showName();
+			
+			alert(person1.showName == person2.showName);//true  属于同一个函数
+			
+		总结：
+			属性创建：使用构造函数加属性，因为属性各不相同
+			方法创建：使用原型对象加方法，因为功能是一样的
+			
+			类似于css
+				相同的东西加到class样式里，相同的东西加到prototype里
+				不同的东西加到行间样式里，不同的东西加到构造函数（类）里。
+-->
+<script>
+			
+</script>

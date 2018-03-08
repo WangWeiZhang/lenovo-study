@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0px;
+				padding:0px;
+			}
+			.box{
+				width: 80%;
+				height:200px;
+				border: 1px solid #B8860B;
+				margin:0 auto;
+			}
+			.box div{
+				width:200px;
+				/*height:200px;*/
+				background: #8A2BE2;
+				border: 2px solid #FFFF00;
+				box-sizing: border-box;
+				font-size: 40px;
+				color: #fff;
+			}
+			.box{
+				display: -webkit-flex;
+				display: flex;
+			}
+			.box0{
+				flex-direction:row;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<h1>order</h1>
+		<div class="box box0">
+			<div style="order: 3;">style-order3 -- dom中1</div>
+			<div style="order: 2;">style-order2 -- dom中2</div>
+			<div style="order: 1;">style-order1 -- dom中3</div>
+		</div>
+		
+	</body>
+</html>

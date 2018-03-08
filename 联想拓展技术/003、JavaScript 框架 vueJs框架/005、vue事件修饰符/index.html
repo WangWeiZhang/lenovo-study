@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件修饰符</title>
+	</head>
+	<link rel="stylesheet" href="css/index.css" />
+	<script src="js/vue.js"></script>
+	<body>
+		<!-- vue-app 根容器-->
+		<div id="vue-app">
+			<h1>单击双击  事件</h1>
+			<!--只能单击一次-->
+			<button @click.once="add(1)">单击涨一岁(只能点击一次)</button>
+			
+			<button v-on:click="subtract(1)">单击减一岁</button>
+			
+			<button @dblclick="add(10)">双击加10岁</button>
+			
+			<button v-on:dblclick="subtract(10)">双击减10岁</button>
+			
+			<p style="clear: both;"></p>
+			
+				
+			<!-- 什么时候函数使用test();  表达式需要加括号{{test()}}  事件加不加都行，传参需要test() -->
+			<p id="age">My age is {{age}}</p>
+			
+			<!--移入加载x y 坐标  移入停止区域 进行停止-->
+			<div id="canvas" v-on:mousemove="updateXY">{{x}} , {{y}}
+				<p v-on:mousemove.stop="" style="width:80px; height: 80px;background: green; font-size: 20px;" >停止区域</p>
+			</div>
+			
+			<!--阻止form submit默认提交    提交事件不再重载页面-->
+			<form v-on:submit.prevent="onSubmit" method="get" action="www.baidu.com">
+				阻止默认提交：<input type="submit"/>
+			</form>
+			
+			<!-- 修饰符可以串联 使用禁止a标签跳转-->
+			<p style='height:60px; border:1px solid red'>
+				<a v-on:click.stop.prevent="" href="http://www.baidu.com" >不能跳转</a>
+			</p>
+		</div>
+		
+		
+		
+		<script type="text/javascript" src="js/app.js">
+		</script>
+		
+	</body>
+</html>
+<!--
+	v-on:click.stop="doThis" ： 阻止冒泡
+	v-on:click.once="add(1)" ：只能触发一次的事件。
+	v-on:click.prevent=""    : 阻止默认动作，例如a标签的地址跳转
+	v-on:submit.prevent="onSubmit"：阻止表单 submit 默认提交
+-->

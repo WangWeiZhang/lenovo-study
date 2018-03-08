@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>二、原型对象绑定的方式</title>
+	</head>
+<body>
+<script type="text/javascript" src="public.js">
+</script>
+<script type="text/javascript">
+	function Cat(name,color,sex){
+		this.name = name;
+		this.color = color;
+		this.sex = sex;
+	}
+	// Cat对象的原型对象
+	console.info(Cat.prototype); 
+	//Cat原型对象下的constructor指针（默认指回构造函数本身）
+	console.info(Cat.prototype.constructor); 
+	
+	
+	//使用原型方式继承 扩展原型对象的 指向，也就是重新给原型对象赋值。（新实例化一个 父级对象）
+	Cat.prototype = new Animal();
+	//此时Cat的原型对象是Animal对象
+	console.info(Cat.prototype);
+	//此时的原型对象的constructor指针指回的是 原型对象Animal的构造函数本身
+	console.info(Cat.prototype.constructor);
+	
+	//此时的原型对象改变了，constructor指针指回方向也改变成为了现有的原型对象本身的构造函数上了，所以需要重新改变原型对象的指回方向为原始的方向。
+	//虽然不重新定位指向，不影响目前的执行结果，但是会改变指针指向的方向，属性对象继承的多了，就会形成指针紊乱，导致出错。所以最好的习惯就是：
+	//如果替换了 prototype对象，那么下一步就是将新的prototype对象加上constructor属性，并将这个属性指回原来的构造函数。
+	Cat.prototype.constructor = Cat;
+	var cat1 = new Cat("大毛","黄色","雄性");
+	console.log(cat1.species);
+	console.log(cat1.yanjing);
+	console.log(cat1.name);
+	console.log(cat1.color);
+	console.log(cat1.sex);
+	alert("打开firebug查看控制台，并且阅读源码，达到复习JavaScript面向对象编程（二）：继承的最佳效果。")
+	
+	
+	
+</script>
+</body>
+</html>

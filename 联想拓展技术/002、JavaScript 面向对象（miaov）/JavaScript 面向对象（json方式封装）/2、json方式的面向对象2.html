@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+<script type="text/javascript">
+	var p1 = {
+		name:"wwz",
+		sex:"男",
+		showName:function(){
+			alert("我的名字是："+this.name);
+		},
+		showSex:function(){
+			alert("我的性别是："+this.sex+"的");
+		}
+	}
+	
+	p1.showName();
+	p1.showSex();
+
+	/*
+	 优点：
+	 	1、编写简单。，不需要原型，构造函数。
+	缺点：
+	 	2、如果需要多个对象的话，需要生成大量的json 控件
+	总结：
+		json方式适合只有一个对象的方式。
+	 * */
+</script>
+</head>
+<body>
+</body>
+</html>

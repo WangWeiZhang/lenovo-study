@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<h1>题目：JavaScript 程序编写</h1>
+<h4>问题描述：</h4>
+<p>1、已知现在有一个 “人” （Person）这个类。含有自己的名字name，自己的性别sex。这个类，能够告诉别人自己叫什么？告诉别人自己是男的还是女的？</p>
+<p>2、已知现在有一个 “工人”（Worker）这个类。同样含有自己名字name，自己的性别sex。还有自己的职业：程序员（coder）也同样能够说出自己的名字和性别。</p>
+<p>3、现在需要使用JavaScript面向对象的知识，完成这道题。（需要考虑效率、优化、后期版本迭代）。</p>
+<p>4、提示：此问题需要一次性体现出面向对象的 -- 封装、继承、prototype、原型链、引用、new、构造函数（类）的概念！</p>
+</body>
+</html>
+
+
+<script>
+	
+	function Person(name , sex){
+		this.name = name;
+		this.sex = sex;
+	}
+	Person.prototype.showName = function(){
+		alert("我的名字叫"+this.name);
+	}
+	Person.prototype.showSex = function(){
+		alert("我的性别是"+this.sex+"的");
+	}
+	/*-------------------------------------*/
+	function Worker(name , sex , job){
+		//this是worker对象
+		//构造函数伪装后传给person，让person以为这个this是person，这个叫构造函数伪装。
+		Person.call(this , name , sex);  // 调用父级对象，继承属性
+		this.job = job;
+	}
+	
+	
+	
+//	Worker.prototype = Person.prototype; //测试室友问题的，对新继承的对象做修改 会影响到父类，结果显然不对。
+	//换成这种方式 将圆形继承过去，也就是拷贝一个。 因为上面的方法涉及到js的引用问题，---- 待写实例。
+	for(i in Person.prototype){
+		Worker.prototype[i] = Person.prototype[i];
+	}
+	
+	
+	
+	Worker.prototype.showJob = function(){
+		alert("我的工作是"+this.job);
+	}
+	Worker.prototype.showName = function(){
+		alert("我是work的showName"+this.name);
+	}
+	var p1 = new Worker("王维璋","男","web前端工程师");
+	p1.showName();
+	var p2 = new Person("孙佳莹" , "女");
+	p2.showName();
+	
+	
+	
+	
+	
+</script>

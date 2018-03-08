@@ -1,0 +1,445 @@
+var common = (function() {
+	$(document).ready(function(){
+		init_datepicker();
+		 //$(document).delegate( 'form', 'submit',  common.submit_ );
+		$(".layout").delegate( 'form', 'submit',  common.submit_ );
+	});
+	
+	return {
+		submit_:submit_,
+		init_datepicker:init_datepicker,
+		sendSyncRequest:sendSyncRequest,
+		activeMenu:activeMenu,
+		valid :valid,
+		resizeIframe:resizeIframe,
+		dateFormat:dateFormat,
+		uuid:uuid,
+		delegate:delegate
+	};
+	//d3实现jquery delegate功能  --暂时不用
+	function  delegate(){
+		 d3.selection.prototype.delegate = function(event, targetselector, handler) {
+		    var self = this;
+		    return this.on(event, function() {
+		           var eventTarget = d3.event.target,
+		            target = self.selectAll(targetselector);
+		        target.each(function(){ 
+		            //only perform event handler if the eventTarget and intendedTarget match
+		            if (eventTarget === this) {
+		                handler.call(eventTarget, eventTarget.__data__);
+		            } else if (eventTarget.parentNode === this) {
+		                handler.call(eventTarget.parentNode, eventTarget.parentNode.__data__);
+		            }
+		        });
+		    });
+	    }
+	}
+	function uuid(len, radix) {
+	    var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+	    var uuid = [], i;
+	    radix = radix || chars.length;
+	 
+	    if (len) {
+	      // Compact form
+	      for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random()*radix];
+	    } else {
+	      // rfc4122, version 4 form
+	      var r;
+	 
+	      // rfc4122 requires these characters
+	      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '_';
+	      uuid[14] = '4';
+	 
+	      // Fill in random data.  At i==19 set the high bits of clock sequence as
+	      // per rfc4122, sec. 4.1.5
+	      for (i = 0; i < 36; i++) {
+	        if (!uuid[i]) {
+	          r = 0 | Math.random()*16;
+	          uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
+	        }
+	      }
+	    }
+	 
+	    return 's'+uuid.join('');
+	}
+	
+	 function dateFormat(date,fmt){ // author: meizz
+		 if(fmt==undefined){
+			 fmt="yyyy-MM-dd";
+		 }
+	  var o = {   
+	    "M+" : date.getMonth()+1,                 // 月份
+	    "d+" : date.getDate(),                    // 日
+	    "h+" : date.getHours(),                   // 小时
+	    "m+" : date.getMinutes(),                 // 分
+	    "s+" : date.getSeconds(),                 // 秒
+	    "q+" : Math.floor((date.getMonth()+3)/3), // 季度
+	    "S"  : date.getMilliseconds()             // 毫秒
+	  };   
+	  if(/(y+)/.test(fmt))   
+	    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
+	  for(var k in o){
+		  if(new RegExp("("+ k +")").test(fmt))   
+			  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));  
+	  }   
+	    
+	  return fmt;   
+	} 
+	
+	function init_datepicker(){
+		$.datepicker.regional['zh-CN'] = {
+				closeText: '关闭',
+				prevText: '<上月',
+				nextText: '下月>',
+				currentText: '今天',
+				monthNames: ['一月','二月','三月','四月','五月','六月',
+				'七月','八月','九月','十月','十一月','十二月'],
+				monthNamesShort: ['一','二','三','四','五','六',
+				'七','八','九','十','十一','十二'],
+				dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+				dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+				dayNamesMin: ['日','一','二','三','四','五','六'],
+				weekHeader: '周',
+				dateFormat: 'yy-mm-dd',
+				firstDay: 1,
+				isRTL: false,
+				showMonthAfterYear: true,
+				yearSuffix: '年'
+			};
+		$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+	 
+	}
+	
+ function download(url, jsonparam, method){
+	    //url and data options required
+	    if( url && jsonparam ){
+	        var inputs = '';
+	        $.each(jsonparam,function(key, value){
+	            inputs+='<input type="hidden" name="'+key +'" value="'+ value +'" />';
+	        });
+	        inputs+='<input type="hidden" name="onOff" value="0" />';
+	        //send request
+	        $('<form action="'+ url +'" method="'+ (method||'post') +'" target="_blank">'+inputs+'</form>')
+	        .appendTo('body').submit();
+	    };
+	};
+	
+	
+	
+	 function iframe_(config, jsonparam, method){
+	   var url = config.action;
+	   var method = config.method;
+	   var target = config.target;
+	 
+	    if( url && jsonparam ){
+	        var inputs = '';
+	        $.each(jsonparam,function(key, value){
+	            inputs+='<input type="hidden" name="'+key +'" value="'+ value +'" />';
+	        });
+	        //send request
+	        $('<form action="'+ url +'" method="'+ (method||'post') +'" target="'+(target||'_blank')+'">'+inputs+'</form>')
+	        .appendTo('body').submit().remove();
+	    };
+	};
+	
+	//给表单注册事件，让class==表单可以
+	function submit_(event) {
+		event.preventDefault();
+		var form = $(this);
+		form.unbind("submit");
+		var config = form.data("options") || {};
+		  
+		var enctype = config.enctype || $(this).attr("enctype");
+		var validResult = valid($(this));
+		if (!validResult) {
+			return;
+		}
+
+		if(config.method=="download"){
+			var jsonparam =  serializeObject(form);
+			download(config.action, jsonparam, 'post');
+			form.data("options", {})
+			return false;
+		}else if(config.method=="iframe"){
+			var jsonparam =  serializeObject(form);
+			iframe_(config,jsonparam);
+			form.data("options", {})
+			return false;
+		}else if(config.method=="default"){
+		form.commit();
+		return false;
+		}
+		
+		var targetid = form.data("target");
+		
+		var frame = $("#"+ targetid)|| form.parents(".frame");
+		
+		
+		if ("multipart/form-data" == enctype) {
+			var options = {
+				url : config.action || $(this).attr("action"),
+				type : config.type || $(this).attr("method"),
+				cache : false,
+				data : new FormData(form[0]),
+				processData : false,
+				contentType : false,
+				beforeSend : function() {
+					if (config.callback == undefined || config.callback == null) {
+						frame.html("");
+						frame.addClass("waitting");
+					}
+				},
+				success : function(json) {
+					if (config.callback == undefined || config.callback == null) {
+						 frame.html(json);
+					} else {
+						config.callback(json);
+					}
+				}
+			}
+		} else {
+			var options = {
+				url : config.action || $(this).attr("action"),
+				type : config.type || $(this).attr("method"),
+				contentType : config.contentType || 'application/json',
+				dataType : config.dataType || 'html',
+				data : config.data || JSON.stringify(serializeObject(form)),
+				beforeSend : function() {
+					if (config.callback == undefined || config.callback == null) {
+						frame.html("");
+						frame.addClass("waitting");
+					}
+				},
+				success : function(json) {
+					
+					frame.removeClass("waitting");
+					if (config.callback == undefined || config.callback == null) {
+						frame.html(json);
+					} else {
+						config.callback(json);
+					}
+					 var ifid = window.tid;
+					 var ifr=$(window.parent.document).find("#"+ifid);
+					 resizeIframe(ifr);
+					
+				},
+				 error: function(XMLHttpRequest, textStatus, errorThrown)
+					{
+						alert('请求失败！');
+
+						setTimeout(function()
+						{
+							keepSessionAlive();
+						}, keepAliveTimeout);
+					}
+			};
+		}
+		form.data("options", {});
+		$.ajax(options);
+		return false;
+	};
+	
+	
+	function resizeIframe(ifr) {
+		var curHeight=ifr.contents().find("html").height();
+		var curWidth=ifr.contents().find("html").width();
+		 ifr.height(curHeight);
+		 ifr.width(curWidth);
+	}
+
+			function serializeObject(form) {
+				var o = {};
+				var a = form.serializeArray();
+				$.each(a, function() {
+					if (o[this.name]) {
+						if (!o[this.name].push) {
+							o[this.name] = [ o[this.name] ];
+						}
+						o[this.name].push(this.value || '');
+					} else {
+						o[this.name] = this.value || '';
+					}
+				});
+				return o;
+			}  
+    
+	 
+	 function valid(form) {
+		 /**
+			这个errMsg对象是这个js验证的主体，是定义的验证的规范
+			**/ 
+			var validator = {
+			 // 检查特定字段是否为必填
+			 "required" : {
+			  msg : "字段不能为空哦！",
+			  test : function(obj) {
+			   // 确保字段尚未有内容输入，并在页面加载时不做检查(在加载时显示"必填字段"可能会让用户感到厌烦
+			   // return
+			   // obj.value.length>0||load||obj.value==obj.defaultValue;//我似乎觉得defaultValue这个值似乎没有什么意义，所以在这里去掉(caoyong)
+				  return obj.val()!='';
+			  }
+			 },
+			 // 确保字段内容是正确的email地址
+			 email : {
+			  msg : "字段不是一个电子邮件地址哦！",
+			  test : function(obj) {
+			   // 确保输入并符合email地址的格式
+			   return !obj.val()
+			     || /^[a-z0-9_+.-]+\@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/i.test(obj.val());
+			  }
+			 },
+			 // 确保字段内容是电话号码并将其自动格式化
+			 phone : {
+			  msg : "字段不是一个电话号码！",
+			  test : function(obj) {
+			   // 确保他是否符合电话号码要求
+			   var m = /(\d{3}).*(\d{3}).*(\d{4})/.exec(obj.val());
+			   // 如果是，可能也只是表面正确而已-强行检查它的格式是否符合我们的要求;(123)456-7890
+			   if (m)
+			    obj.val("(" + m[1] + ")" + m[2] + "-" + m[3]);
+			   return !obj.val() || m;
+			  }
+			 },
+			 handPhone : {
+			  msg : "不是一个有效的手机号！",
+			  test : function(obj) {
+			   // 确保他是否符合电话号码要求
+			   var m = /[0-9]{1,11}/.exec(obj.val());
+			   // 如果是，可能也只是表面正确而已-强行检查它的格式是否符合我们的要求;(123)456-7890
+			   return !obj.val() || m;
+			  }
+			 },
+			 ip : {
+			  msg : "不是一个有效的ip哦！",
+			  test : function(obj) {
+			   // 确保他是否符合电话号码要求
+			   var m = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/g.exec(obj.val());
+			   // 如果是，可能也只是表面正确而已-强行检查它的格式是否符合我们的要求;(123)456-7890
+			   return !obj.val() || m;
+			  }
+			 },
+			 number : {
+			  msg : "不是一个数字哦！",
+			  test : function(obj) {
+			   // 确保他是否符合电话号码要求
+			   var m = /^\d+(\.\d*)?$/.exec(obj.val());
+			   // 如果是，可能也只是表面正确而已-强行检查它的格式是否符合我们的要求;(123)456-7890
+			   return !obj.val() || m;
+			  }
+			 },
+			 
+			 
+			 int : {
+			  msg : "不是一个整数哦！",
+			  test : function(obj) {
+			   // 确保他是否符合电话号码要求
+			   var m = /^\d+$/.exec(obj.val());
+			   // 如果是，可能也只是表面正确而已-强行检查它的格式是否符合我们的要求;(123)456-7890
+			   return !obj.val() || m;
+			  }
+			 },
+			 // 确保字段内容符合MM/DD/YYYY的时间格式
+			 date : {
+			  msg : "不是一个有效的日期！",
+			  test : function(obj) {
+			   return !obj.val() || /^\d{2,4}\/\d{2}\/\d{2}$/.test(obj.val())
+			     || /^\d{2,4}-\d{2}-\d{2}$/.test(obj.val())
+			     || /^\d{2,4}-\d{2}-\d{2}\s\d{1,2}:\d{1,2}:\d{1,2}$/.test(obj.val());
+			  }
+			 },
+			 // 确保字段内容是一个正确的URL
+			 url : {
+			  msg : "不是一个有效的URL地址哦!",
+			  test : function(obj) {
+			   // 确保有文本输入，而且不是默认的http://文本
+			   return !obj.val()
+			     || obj.val() == 'http://'
+			     || /^https?:\/\/([a-z0-9-]+\.)+[a-z0-9]{2,4}.*$/
+			       .test(obj.val());
+			  }
+			 },
+			 // 确保字段内容是一个正确的密码
+			 passwd : {
+			  msg : "密码应该以字母开头，可以是字母、数字!@#$%^&*中的任意的6-16个字符！，",
+			  test : function(obj) {
+			   // 确保有文本输入，而且不是默认的http://文本
+			   return !obj.val()
+			     || /^[a-zA-Z]{1}[a-zA-Z0-9!@#$%^&*]{5,16}$/.test(obj.val());
+			  }
+			 }
+			};
+//			    var inputs = $(form).find(':text') ;//<-- Should return all input elements in that specific form.
+//			    var inputs=$(form).find(':input') ;
+//			    	
+//			    $.each(inputs, function() {
+//			    });
+	 var result=true;
+	 
+	$.each($(':text, select ,textarea,check,radio', form),function(k){
+		if(!result){
+			return;
+		}
+		var name = $(this).attr('placeholder');
+		if(name==null||name==undefined||name==''){
+			name = "该字段";
+		}
+	 var classstring = $(this).attr('class');
+	 
+	
+	 if(classstring==undefined||classstring==null){
+		 return  ;
+	 }
+	 var classTrim=classstring.replace(/\s{2,}/g,'\s');
+	 var classes=classTrim.split(/\s+/);
+	 for(var i=0;i<classes.length;i++){
+		 var clazz=classes[i];
+		 var valider = validator[clazz];
+		 if(valider==null|| valider==undefined ){
+			 continue;
+		 }
+	
+		var test=valider.test($(this));
+		$('.tips').remove();
+		if(!test){
+			result =false;
+			$(this).next('.tips').remove();
+			 $(this).after("<p class=\"tips\">【"+name+"】"+valider.msg+"</p>");
+		}
+	 }
+  
+	});
+
+	 return result;
+	}
+
+	//用ajax发送同步请求href_url，将请求结果放到contentContainer
+	function sendSyncRequest(href_url, contentContainer) {
+		var options = {
+			async : false,
+			cache : false,
+			url : href_url,
+			type : 'post',
+			contentType : 'application/html',
+			dataType : 'html',
+			success : function(json) {
+				contentContainer.html(json);
+			}
+		};
+		$.ajax(options);
+	}
+    //用ajax发送异步请求href_url，将请求结果放到contentContainer
+	function activeMenu(href_url, contentContainer) {
+		var options = {
+			cache : false,
+			url : href_url,
+			type : 'post',
+			contentType : 'application/html',
+			dataType : 'html',
+			success : function(json) {
+				contentContainer.html(json);
+			}
+		};
+		$.ajax(options);
+	}
+
+})();

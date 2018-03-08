@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style type="text/css">
+	    .demo{width: 100px;
+	        height: 100px;
+	        border: 1px solid red}
+</style>
+</head>
+
+<body>
+    <div class="demo"></div>
+    <button>sss</button>
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript">
+    $("button").click(function(){
+        $(".demo").animate({
+            aa:"360" //目的就是取一个属性值360
+        },{
+            step:function(now,fx){
+                //console.log(now);
+                $(".demo").css({"transform":"rotate("+now+"deg)"})
+            },
+            duration:1000
+        });
+    })
+</script>
+</body>
+</html>

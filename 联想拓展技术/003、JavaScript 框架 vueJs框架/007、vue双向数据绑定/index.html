@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>双向数据绑定的两种方法</title>
+		<script type="text/javascript" src="../vue.js">
+		</script>
+	</head>
+	<body>
+		<div id="vue-app">
+			<h1>v-model双向数据绑定  / input / select / textarea</h1>
+			<label> 姓名： </label>
+			<input ref="names" type="text" v-model="name" v-on:keyup="showName" />
+			<span>{{name}}</span>
+			<br /><br />
+			<label> 年龄： </label>
+			<input ref="ages" type="text"  v-model="age" v-on:keyup="showSex" />
+			<span>{{age}}</span>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		
+		var a =new Vue({
+			el:"#vue-app",
+			data:{
+				name:"",
+				age:"",
+				sex:"男"
+			},
+			methods:{
+				showName:function(){
+					//this.name = this.$refs.names.value;//双向绑定的一种方式
+				},
+				showSex:function(){
+					//this.age = this.$refs.ages.value;//双向绑定的一种方式
+				}
+			}
+		})
+		
+	</script>
+</html>
+<!--
+	1、通过事件触发methods中的自定义方法，从而将this.name设置成input的value。
+		value的获取，需要首先在view上设置ref="xxx",再在控制方法中使用 this.$refs.xxx.value获取。
+	2、通过vue自行封装，在view中，v-model="需要双向绑定的属性名称"绑定在 input select 或者 textarea上 实现数据双向绑定
+	
+-->

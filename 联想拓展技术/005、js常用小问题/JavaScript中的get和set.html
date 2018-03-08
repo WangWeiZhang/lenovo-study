@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	<script type="text/javascript">
+		var test = {  
+			_Name : "Lilei",  
+			_Age : 20,  
+			  
+			//_Name的只读  
+			  
+			get name() {
+				return this._Name;
+			},
+			get age() {
+				return this._Age;
+			},
+			//_Age的读写  
+			set age(age) {
+				this._Age = age;
+			}
+			
+		}  
+	  
+			alert(test.name + " " + test.age);//Lilei 20  
+			test.name = 'Lily';  
+			test.age = 18;  
+			alert(test.name + " " + test.age);//Lilei 18   
+			alert(test._Name + " " + test._Age);//Lilei 18 _Name 只读，只写了_Age属性  
+    </script>
+    <pre>
+关于js中的get、set方法
+1.什么是getter，什么是setter？
+
+	概念：getter 是一种获得属性值的方法，setter是一种设置属性值的方法。
+		getter 负责查询值，它不带任何参数.
+		setter则负责设置键值，值是以参数的形式传递，在他的函数体中，一切的return都是无效的。
+	
+	注意：和普通属性不同的是，存储器属性在只声明了get或set时，对于读和写是两者不可兼得的，当它只拥有了getter方法，那么它仅仅只读，同样的，当它只有setter方法，那么您读到的永远都是undefined。
+
+2.怎么定义？
+
+	在对象初始化的时候定义
+	在对象定义后的时候定义
+
+
+3.例子：
+
+	var test = {  
+	_Name : "Lilei",  
+	_Age : 20,  
+	  
+	//_Name的只读  
+	  
+	get name() {return this._Name;},  
+	//_Age的读写  
+	set age(age) {this._Age = age;},   
+	get age() {return this._Age;}  
+	}  
+	  
+	alert(test.name + " " + test.age);//Lilei 20  
+	test.name = 'Lily';  
+	test.age = 18;  
+	alert(test.name + " " + test.age);//Lilei 18   
+	alert(test._Name + " " + test._Age);//Lilei 18 _Name 只读，只写了_Age属性  
+    </pre>
+	</body>
+</html>

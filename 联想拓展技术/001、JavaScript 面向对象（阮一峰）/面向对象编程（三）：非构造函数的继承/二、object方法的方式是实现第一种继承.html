@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>二、object实现第一种非构造继承</title>
+	</head>
+<body>
+		
+<script type="text/javascript">
+	//比如，现在有一个对象，叫做"中国人"。
+　　var Chinese = {
+　　　　nation:'中国',
+		didian:'亚洲',
+		alt:'36个省'
+　　};
+	//还有一个对象，叫做"医生"。
+　　var Doctor ={
+　　　　career:'医生'
+　　}
+	/*
+	 请问怎样才能让"医生"去继承"中国人"，也就是说，我怎样才能生成一个"中国医生"的对象？
+	 这里要注意，这两个对象都是普通对象，不是构造函数，无法使用构造函数方法实现"继承"。
+	 * */
+	
+	//json格式的发明人Douglas Crockford，提出了一个object()函数，可以做到这一点。
+　　function object(o) {
+　　　　function F() {}
+　　　　F.prototype = o;
+		var a = new F();
+　　　　return new F();
+　　}
+	//s这个object()函数，其实只做一件事，就是把子对象的prototype属性，指向父对象，从而使得子对象与父对象连在一起。
+	
+	//使用的时候，第一步先在父对象的基础上，生成子对象：
+　　var Doctor = object(Chinese);
+		Doctor.career = '医生';
+		console.log(Doctor);
+	
+	console.log(Doctor.nation)//中国 
+	//当一个对象需要引用一个属性时，JavaScript引擎首先会从这个对象自身的属性表中寻找这个属性标识，
+	//如果找到则进行相应读写操作，如果没有在自身的属性表中找到，则在_proto_属性引用的对象（原型对象）的属性表中查找，
+	//如此往复，直到找到这个属性或者_proto_属性指向null为止（object prototype ）。
+</script>	
+		
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>命名空间</title>
+
+<script type="text/javascript">
+	//把同一类方法 包在一起
+	//比如百度 阿里的 库 都是使用命名空间
+	var lenovo = {};
+	
+	lenovo.project = {
+		video : function(){
+			alert("联想项目部的视频项目");
+		},
+		radio : function(){
+			alert("联想项目部的语音项目");
+		},
+		message : function(){
+			alert("联想项目部的聊天项目");
+		},
+		chart : function(){
+			alert("联想项目部的图表项目");
+		}
+	}
+	
+	lenovo.person = {
+		boy : function(){
+			alert("联想员工男的有10000个");
+		},
+		girl : function(){
+			alert("联想员工女的有1000个");
+		}
+	}
+	
+	lenovo.project.message();
+	lenovo.person.boy();
+	
+	//缺点：只能使用一次，比如公共函数就比较符合。
+	//优点： 便于管理，和命名冲突。
+	
+	//下一个实例比较重要的引出了面向对象非常重要的一点，请看实例4
+	
+</script>
+</head>
+<body>
+</body>
+</html>

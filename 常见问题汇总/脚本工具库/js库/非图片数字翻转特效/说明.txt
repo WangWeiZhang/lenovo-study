@@ -1,0 +1,53 @@
+参照地址 ：xiaole.lenovo.com/dashBoard/first  
+		   xiaole.lenovo.com/dashBoard/third
+
+1、引入odometer.js文件模块
+2、引入odometer.css 文件模块
+
+结构目录
+	1、html
+	
+	//可以自己定义
+	<div id="box"> 
+	
+		//class 为插件中的 odometer 设置个 id 目的是将数字通过请求 实时得到
+		<div class="odometer" id="userCount"></div>
+	
+	</div>
+	
+	2、JavaScript and jquery
+	
+		a、ajax交互过来的实时数据 === >>>  data.count.userCount
+		
+		b、$(function (){
+			
+			//封装方法 实现翻转特效
+			$(".odomenter").show();
+			
+			//将交互过来的数据 替换给div标记
+			$("#userCount").html(data.count.userCount); 
+			
+		})
+		
+	3、调用算法实现 数字长度的最大响应
+	
+		//检查翻转数字的长度 根据长度设置字体大小
+		function checkDigit(){
+		
+			// 自定义下面div下的 一个 class = odometer-digit 的span。也就是每一个span装一个数字			
+			var $quote = $(".odometer-digit"); 
+			
+			// 获取span的数量 也就是传递过来的数字长度
+			var $numWords = $quote.length;
+			
+			//判断数字长度，给出响应的字号大小单位 （可以自行判断）
+			if (($numWords >= 3) && ($numWords < 4)) {
+				$(".odometer").css("font-size", "3vw");
+			}
+			else if (($numWords >= 4) && ($numWords < 5)) {
+				$(".odometer").css("font-size", "2.5vw");
+			} else{
+				 $(".odometer").css("font-size", "2.6vw");
+			} 
+		  
+		}

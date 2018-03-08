@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1 input {background:#ccc;}
+			#div1 .active{background:yellow;}
+			#div1 div {
+				width: 200px;
+				height:200px;
+				background: #ccc;
+				display: none;
+			} 
+			
+		</style>
+		
+		<script>
+			window.onload = function(){
+				var oDiv = document.getElementById("div1");
+				var aBtn = oDiv.getElementsByTagName("input");
+				var aDiv = oDiv.getElementsByTagName("div");
+				
+				for(var i=0; i<aBtn.length; i++){
+					aBtn[i].index = i;
+					alert(aBtn[i].index)
+					aBtn[i].onclick = function(){
+						for(var j=0; j<aBtn.length; j++){
+							aBtn[j].className = "";
+							aDiv[j].style.display = "none";
+						}
+						this.className = "active";
+						aDiv[this.index].style.display = "block";
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<input class='active' type="button" value = "教育">
+			<input type="button" value = "财经">
+			<input type="button" value = "体育">
+			
+			<div style='display: block;'>哈哈哈大声道啊大大大神</div>
+			<div >加大爱上 萨达‘了萨达add丰富的规划</div>
+			<div >萨达撒多阿萨德阿达阿萨德阿萨德sa</div>
+		</div>
+	</body>
+</html>

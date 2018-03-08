@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	function show(){
+		alert(this);
+	}
+	
+	show(); // window
+	
+	window.show = function(){
+		alert(this);
+	}
+	window.show();
+	
+	//说明全局的函数就是属于window的
+</script>

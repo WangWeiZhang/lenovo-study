@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+		function createPerson(name , sex){   //构造函数
+			this.name = name;
+			this.sex = sex;
+		}
+		createPerson.prototype.showName = function(){
+			alert(this.name);
+		}
+			
+		createPerson.prototype.showSex = function(){
+			alert(this.sex);
+		}
+		
+		var person1 =new createPerson("Blue" , "男");
+		var person2 =new createPerson("Top" , "女");
+		
+		person1.showName();
+		person2.showName();
+		
+		alert(person1.showName == person2.showName);//true  属于同一个函数
+		
+		/*
+		总结：
+			属性创建：使用构造函数加属性，因为属性各不相同
+			方法创建：使用原型对象加方法，因为功能是一样的
+			
+		类似于css
+			相同的东西加到class样式里，相同的东西加到prototype里
+			不同的东西加到行间样式里，不同的东西加到构造函数（类）里。
+		 * */
+</script>

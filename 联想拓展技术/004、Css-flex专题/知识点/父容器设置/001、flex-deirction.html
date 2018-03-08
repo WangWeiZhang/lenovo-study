@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0px;
+				padding:0px;
+			}
+			.box{
+				width: 80%;
+				height:200px;
+				border: 1px solid #B8860B;
+				margin:0 auto;
+			}
+			.box div{
+				width:200px;
+				/*height:200px;*/
+				background: #8A2BE2;
+				border: 2px solid #FFFF00;
+				box-sizing: border-box;
+				font-size: 40px;
+				color: #fff;
+			}
+			.box{
+				display: -webkit-flex;
+				display: flex;
+				flex-direction:row;
+			}
+			
+			.box1{
+				flex-direction: column;
+			}
+			.box2{
+				flex-direction:row-reverse;
+			}
+			.box3{
+				flex-direction:column-reverse
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<h1>flex-direction:row;</h1>
+		<div class="box">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+		<h1>flex-direction:column;</h1>
+		<div class="box box1">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+		<h1>flex-direction:row-reverse;</h1>
+		<div class="box box2">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+		<h1>flex-direction:column-reverse;</h1>
+		<div class="box box3">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+	</body>
+</html>
