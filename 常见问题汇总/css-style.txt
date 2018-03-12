@@ -43,7 +43,10 @@
 
 	56px = 2.987rem;
 	
-	
-	
+3、css渐变
+	https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Using_CSS_gradients
+
+4、CSS3 旋转、扭曲、缩放、位移、矩阵 、原（基）点、过渡属性、过渡所需时间 ...
+	http://blog.csdn.net/xxssyyyyssxx/article/details/53127784
 	
 
