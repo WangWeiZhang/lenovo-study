@@ -7,46 +7,25 @@
 	&emsp;	  &#8195;	一个空白（2个字符宽度）
 	&thinsp;  &#8201;	窄空白（小于1个字符宽度）
 	
-2、个人常用rem对照表
-
-	1rem = 18.75px;
-
-	4rem = 0.213rem;
-
-	6rem = 0.32rem;
-
-	8rem = 0.427rem;
-
-	9rem = 0.48rem;
-
-	10rem = 0.533rem;
-
-	12px = 0.64rem;
-
-	13px = 0.693rem;
-
-	16px = 0.853rem;
-
-	18px = 0.96rem;
-
-	20px = 1.07rem;
-	
-	23px = 1.227rem;
-
-	24px = 1.28rem;
-
-	30px = 1.6rem;
-
-	32px = 1.707rem;
-
-	35px = 1.867rem;
-
-	56px = 2.987rem;
-	
-3、css渐变
+2、css渐变
 	https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Using_CSS_gradients
 
-4、CSS3 旋转、扭曲、缩放、位移、矩阵 、原（基）点、过渡属性、过渡所需时间 ...
+3、CSS3 旋转、扭曲、缩放、位移、矩阵 、原（基）点、过渡属性、过渡所需时间 ...
 	http://blog.csdn.net/xxssyyyyssxx/article/details/53127784
 	
+4、css如何居中？如何给浮动元素居中？
+	如何居中：
+		a、margin:0 auto;
+		b、水平：position:absolute; left:50%; margin-left:-宽度的一半；--->知道宽度
+		c、垂直：position:absolute; top:50%; margin-top:-宽度的一半；  --->知道宽度
+		d、主轴为水平时 display:flex; justify-content:center; 水平居中； align-items:center; 垂直居中 （可以不知道 宽度）
+        e、transform:translate("50%","50%"); 平移的方式垂直水平居中。 基点默认center center
+	
+	浮动元素如何居中
+		a、margin-left:50%; position:relative;  left:-宽度一半（水平）
+		b、margin-top:50%;  position:relative;  top:-宽度的一半(垂直)
+		c、外层包裹等宽元素，内宽度100%。外层使用 margin:o auto;
+		d、外层包裹等宽元素，外层使用display:flex;同上。
 
+5、css3新增属性和样式
+	选择器、圆角边框、阴影text-shadow、渐变、弹性盒模型、@font-face自定义引入字体、对象变换过渡效果（transform、transition 2-3d）、animation。

@@ -192,3 +192,15 @@
 		
 （8）、JavaScript开发规范
 	https://www.cnblogs.com/polk6/p/4660195.html
+	
+（9）、js事件兼容性问题（冒泡、默认动作，绑定事件、事件对象）
+		event事件问题（获取触发事件的对象dom元素）：
+			e=ev||window.event;
+		监听事件
+			通过addEventListener兼容w3c主流..
+			通过attachEvent兼容IE...
+		js阻止默认事件
+			e.preventDefault();//W3C标准  、  e.returnValue='false';//IE..
+		阻止事件冒泡 ;
+			e.stopPropagation();//W3C标准   、    e.cancelBubble=true;//IE....
+

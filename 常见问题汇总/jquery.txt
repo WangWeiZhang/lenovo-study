@@ -114,3 +114,13 @@
 			</div>
 （10）、jquery.transform 动画（在jQuery中使用transform）
 		https://www.cnblogs.com/mymission/p/5888078.html
+
+（11）、jquery如何为动态添加的dom绑定事件。
+		jquery 1.8 以前 推荐 “live”。
+		jquery 1.8 以后 推荐 “on( "click","被绑元素".fn(){触发的函数} )”
+		
+		官网建议，尽量使用on来绑定动态元素，我经常使用on
+
+（12）、jquery阻止事件向上冒泡/默认动作
+		1、ecent.stopPropagation(); 阻止事件冒泡
+		2、return false;            阻止事件冒泡、阻止默认动作
