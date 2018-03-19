@@ -24,7 +24,7 @@
 		var startdate=lastY+"-"+(lastM<10 ? "0" + lastM : lastM)+"-"+(lastD<10 ? "0"+ lastD : lastD);//三十天之前日期
 		
 		/*
-（3）、js中从一个对象解析出字符串stringify()、从一个字符串中解析出json对象parse
+（3）、js中从一个对象解析出字符串stringify()、从一个字符串中解析出json对象JSON.parse()
 		var a = {a:1,b:2}
 		
 		结果：
@@ -204,3 +204,5 @@
 		阻止事件冒泡 ;
 			e.stopPropagation();//W3C标准   、    e.cancelBubble=true;//IE....
 
+（10）、JavaScript 跨域请求后台接口，实现交互。
+		https://www.cnblogs.com/chenshishuo/p/4919224.html

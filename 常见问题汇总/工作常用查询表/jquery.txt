@@ -124,3 +124,6 @@
 （12）、jquery阻止事件向上冒泡/默认动作
 		1、ecent.stopPropagation(); 阻止事件冒泡
 		2、return false;            阻止事件冒泡、阻止默认动作
+
+（13）、jquery 跨域请求后台接口，实现交互。
+		https://www.cnblogs.com/chenshishuo/p/4919224.html

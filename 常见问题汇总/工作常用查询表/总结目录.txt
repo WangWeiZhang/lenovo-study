@@ -13,6 +13,7 @@
    （10）、jquery.transform 动画（在jQuery中使用transform）
    （11）、jquery如何为动态添加的dom绑定事件。
    （12）、jquery阻止事件向上冒泡/默认动作
+   （13）、jquery 跨域请求后台接口，实现交互。
 二、echarts
 
    （1）、echarts 多组数据的series 和 legend 的处理方式
@@ -29,7 +30,8 @@
    （7）js数组从大倒下排序
    （8）JavaScript开发规范
    （9）js事件兼容性问题（冒泡、默认动作，绑定事件、事件对象）
-
+   （10）JavaScript 跨域请求后台接口，实现交互。
+	
 四、CSS
    （1）css控制空格（&nbsp;）的间距
    （2）css渐变
