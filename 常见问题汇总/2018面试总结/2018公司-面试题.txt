@@ -38,12 +38,36 @@
 	b、在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。
 
 5、请描述一下 cookies 、 sessionStorage 和 localStorage 的区别？
-
+	分别介绍概念：
+	cookie是传统的缓存机制。
+		大小不到4kb
+		在跨浏览器方面存储大小不一致。
+		手动编写setItem和getItem方法
+	sessionStorage 
+		临时会话，页面关闭，本地存储消失。
+		数据不能共享。
+	localStorage 
+		永久存储（可以手动删除数据）
+		数据能够共享（两个窗口同时打开一个页面，数据能够共享）
 	
-
+	描述真正区别
+	localStorage 和 sessionStorage 
+		localStorage 和 sessionStorage ：存储限制都是 5M 大于cookie 的4kb。
+		localStorage 和 sessionStorage ：客户端完成，不会请求服务器。而cookie则会在http头中夹杂着信息请求服务器。
+		localStorage 和 sessionStorage ：相比于cookie，有自己封装好的 getItem 和 setItem方法，使用更方便。
+	
 6、如何实现浏览器内多个标签之间的通信？
 
-7、什么是跨域？跨域请求资源的方法有哪些？  
+
+
+7、什么是跨域？跨域请求资源的方法有哪些？
+	说道跨域，就要知道同源策略，由于ajax的同源策略的限制。导致不同域名下的资源和数据无法请求成功。
+	方法：
+		a、使用script标签的src进行请求，传递callback=“对象名称”
+		b、iframe 的 document.domain 跨域
+		c、jquery jsonp跨域，需要些dataType:"jsonp"，jsonp:"callback"、jsonpCallback:"success",这三个参数。（常用）
+		d、前端设置请求头，后台做代理。
+	
 	注意：jsonp跨域不支持post请求，只支持get
 	https://www.cnblogs.com/chenshishuo/p/4919224.html
 
