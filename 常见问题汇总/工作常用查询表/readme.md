@@ -16,7 +16,7 @@
    （12）、jquery阻止事件向上冒泡/默认动作
    （13）、jquery 跨域请求后台接口，实现交互。
 #二、echarts
-
+ 
    （1）、echarts 多组数据的series 和 legend 的处理方式
    （2）、echarts 堆叠柱形图      ----处理数据
 
