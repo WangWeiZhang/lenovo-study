@@ -33,11 +33,12 @@
 	
 	person1.showName();
 	person2.showName();
+	alert(person1.showName == person2.showName)
 	/*
 	 优点：
 	 	1、和object相比效果一模一样
 	 	2、好在，在创建对象的时候，调一下函数就好
-	工厂方式的问题，缺点：
+	 缺点：
 		a、没有看见两个对象之间的联系，看不出是否共同属于某个对象 （没使用new）
 		
 		b、两个对象的调用的时候，都创建各自的空间，所以浪费内存，资源。（因为每次调用的时候都是一个new function）
