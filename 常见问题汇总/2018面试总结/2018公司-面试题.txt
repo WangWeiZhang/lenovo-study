@@ -197,3 +197,87 @@
 	<3>AJAX不能很好支持移动设备:一些手持设备（如手机、PDA等）现在还不能很好的支持Ajax
 
 21、vue的全家桶了解吗？
+
+22、js面向对象
+	a、原理：js面向对象其实就是java类的思想。 本质上对于开发是 设计模式（编写对象的方式） 的选择。JavaScript有好多种设计模式。例如 传统的 函数式编程。
+	
+	b、面向对象有几种创建方式。其中的优缺点为
+		第一种：原始模式创建方式
+			var obj = new Object();
+			obj.name = "王维璋";
+			obj.sex = "男";
+			obj.showName = function(){
+				alert(this.name);
+			}
+			obj.showName();
+			
+			缺点：
+				1、创建一个对象，写的是死的属性值和方法;
+				2、如果创建多个对象，会造成强烈的代码冗余。麻烦
+				3、如果有很多个对象，并不能快速清楚的看出，这些对象之间的联系。
+		
+		第二种：工厂方式创建对象
+			function createPerson(name , sex){ 
+				var obj = new Object();
+				obj.name = name;
+				obj.sex = sex;
+				obj.showName = function(){
+					alert(this.name);
+				}
+				return obj; 
+			}
+			var person1 = createPerson("Blue" , "男");
+			person1.showName();
+			
+			总结: 工厂方式相比原始模式，在创建对个对象的时候，已经解决了代码冗余的问题。
+				  但是，没有使用new操作符，我们没法实现真正的继承，封装，不浪费内存。
+			
+		第三种：构造函数方法创建对象
+			function createPerson(name , sex){   //构造函数
+				this.name = name;
+				this.sex = sex;
+				
+				this.showName = function(){
+					alert(this.name);
+				}
+			}
+			
+			var person1 =new createPerson("Blue" , "男");
+			var person2 =new createPerson("Top" , "女");
+			
+			总结：1、使用了new操作符解决了 在这里我们都可以通过this统一指向当前实例化对象。
+				  2、也解决了，没有使用new操作符的缺点。
+				  3、但是 两个实例对象的相同方法，还是属于两块不同的地址，所以浪费资源内存的缺陷还是没有解决
+				  
+		第四种：原型和构造函数混合法创建对象
+			function createPerson(name , sex){   //构造函数
+				this.name = name;
+				this.sex = sex;
+			}
+			createPerson.prototype.showName = function(){
+				alert(this.name);
+			}
+			
+			var person1 =new createPerson("Blue" , "男");
+			person1.showName();
+			
+			总结：
+			    我们每生成一个函数，他都会有一个prototype属性，指向他的原型对象。我们在这个原型对象上绑定需要的方法和属性。在原型对象上通过constructor指回原来的构造函数。最后我们需要使用的话，使用new操作符实例化构造函数对象，就能共享原型对象的属性和方法。
+		
+			原型：我们每生成一个函数，他都会有一个prototype属性，指向他的原型对象。我们在这个原型对象上绑定需要的方法和属性。在原型对象上通过constructor指回原来       的构造函数。最后我们需要使用的话，使用new操作符实例化构造函数对象，就能共享原型对象的属性和方法。
+			原型链：我们的构造函数的prototype属性指向原型对象，原型对象又指回构造函数，我们使用的时候实例化构造函数，就能继承原型上的属性和方法，这个过程就是原型链。
+			
+			
+			
+		面向对象面试总结：
+		
+			面向对象有几种创建方式，
+				第一种object创建，代码冗余。
+				第二种是工厂模式创建，没法继承和封装，浪费内存。
+				第三种是构造函数创建，使用this指向实例化的对象。但是多个实例化的地址引用不是一个。
+				第四种：原型和构造函数的方式结合。这样一来，动态的属性写在构造函数里，方法绑定到原型上。可以共用方法。
+				
+			原型：	我们每生成一个函数，他都会有一个prototype属性，指向他的原型对象。我们在这个原型对象上绑定需要的方法和属性。在原型对象上通过constructor指回原来的构造函数。最后我们需要使用的话，使用new	操作符实例化构造函数对象，就能共享原型对象的属性和方法。
+
+			原型链：
+				原型指向、对象实例化使用的过程就是原型链。			

@@ -1,0 +1,23 @@
+
+caret：向下的三角符号
+pull-left：向左浮动   快速浮动 不能用于导航条组件中
+pull-right：向右浮动  快速浮动 不能用于导航条组件中
+center-block： 让内容块居中
+clearfix： 清除浮动
+disabled: 禁用按钮和类
+
+显示隐藏工具类
+show： 强制显示  
+hidden：强制隐藏 不占位置
+sr-only：隐藏，优先级没有hidden高
+invisible ： 隐藏，保留原来的位置
+
+
+img-thumbnail：增加圆角边框
+img-rounded： border-radius:6px
+img-circle：  border-radius:50%
+
+.col-xs-    超小屏幕 手机 (<768px)
+.col-sm-	小屏幕 平板 (≥768px)
+.col-md-	中等屏幕 桌面显示器 (≥992px)
+.col-lg-	大屏幕 大桌面显示器 (≥1200px)
