@@ -280,4 +280,98 @@
 			原型：	我们每生成一个函数，他都会有一个prototype属性，指向他的原型对象。我们在这个原型对象上绑定需要的方法和属性。在原型对象上通过constructor指回原来的构造函数。最后我们需要使用的话，使用new	操作符实例化构造函数对象，就能共享原型对象的属性和方法。
 
 			原型链：
-				原型指向、对象实例化使用的过程就是原型链。			
+				原型指向、对象实例化使用的过程就是原型链。
+
+23、js数据类型
+	Number,String,Boolean,Null,Undefined、Object
+
+24、浮动塌陷问题
+	原因：元素设置浮动后悔脱离当前文档流，不受父元素控制，故会形成父元素高度无法撑开的塌陷问题。
+	以下为四种解决办法： 
+	1. 设置父元素的高度 
+	2. 给父元素添加overflow:hidden属性 
+	3. 给父级添加伪类after 
+	4. 在浮动元素后面添加空div 
+	5、clear:both
+	
+25、jquery绑定事件的几种方式和区别
+	一：bind(type,[data],function(eventObject))不能动态绑定
+	二、live(type, [data], fn) 事件委派，也可以动态绑定
+	三、on(type,[selector],[data],fn) 可以动态绑定dom事件
+	四、$('element').on('click',getHtml);常用会产生冒泡，无法动态绑定
+	
+26、js写一个b继承a的函数
+	function parent(age,name){ 
+		this.age = age; 
+		this.name = name; 
+	} 
+	parent.prototype.show = function(){ 
+		alert('父级方法'); 
+	} 
+	function child(age,name,job){ 
+		parent.apply(this,arguments); 
+		this.job = job; 
+	} 
+	(function(){ 
+		for(var i in parent.prototype){ 
+		child.prototype[i]=parent.prototype[i] 
+	} 
+	})(); 
+
+	var a = new parent(14,'大象'); 
+	var b = new child(15,'公象','母象'); 
+	a.show(); 
+	
+27、js实现阶乘
+	function factorial (num) {
+		if (num < 0) {
+			return -1;
+		} else if (num === 0 || num === 1) {
+			return 1;
+		} else {
+			for (var i = num - 1; i >= 1; i--) {
+				num *= i;
+			}
+		}
+		return num;
+	};
+	factorial(6)
+	
+28、call和apply
+	它们在功能上是没有区别的，都是改变this的指向，它们的区别主要是在于方法的实现形式和参数传递上的不同
+	
+	①：函数.call(对象,arg1,arg2....)
+	②：函数.apply(对象，[arg1,arg2,...])
+	
+	应用场景：也就是继承
+		所有的函数再被调用的时候都会默认传入两个参数，一个是this，还有一个是arguments。在默认情况下this都是指当前的调用函数的对象。但是有时候我们需要改变this的指向，也就是说使函数可以被其他对象来调用，这时候我们就可以使用call,apply方法了。
+
+29、js面向对象 原型和原型链的算法考察
+	function A(){}
+	function B(){}
+	var a = new A();
+	console.log(a.constructor===A); //a.constructor 指回构造函数a 所以为true
+	console.log(A.prototype.constructor);//因为原型下有一个constructor指针指回构造函数
+	console.log(A.prototype.constructor===A);//和第一个同理 A.prototype原型下的指针指回A
+	console.log(a.hasOwnProperty("constructor"));//a自身是没有constructor这个属性的 所以false
+	console.log(a instanceof A);//instanceof测试原型中是否有某个构造函数
+
+30、js考察面向对象继承
+	var b = {x:4}
+	function fn2(o){
+		this.x = o.x;
+	}
+
+	fn2.prototype = {
+		init:function(){
+			return this.x
+		}
+	}
+
+	var fn3 = new fn2({x:5});
+	console.log(fn3.init()); //正常输出属性  5
+	console.log(fn3.init === fn2.init); //false fn2没有实例化是不能够使用的
+	console.log(fn3.init.call(b)); //继承初始化的b的值4 输出4
+	var c = fn3.init;
+	console.log(c()); //undefined
+

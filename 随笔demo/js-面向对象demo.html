@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script>
+//function A(){}
+//function B(){}
+//var a = new A();
+//console.log(a.constructor===A); //a.constructor 指回构造函数a 所以为true
+//console.log(A.prototype.constructor);//因为原型下有一个constructor指针指回构造函数
+//console.log(A.prototype.constructor===A);//和第一个同理 A.prototype原型下的指针指回A
+//console.log(a.hasOwnProperty("constructor"));//a自身是没有constructor这个属性的 所以false
+//console.log(a instanceof A);//instanceof测试原型中是否有某个构造函数
+
+
+var b = {x:4}
+function fn2(o){
+	this.x = o.x;
+}
+
+fn2.prototype = {
+	init:function(){
+		return this.x
+	}
+}
+
+var fn3 = new fn2({x:5});
+console.log(fn3.init()); //正常输出属性  5
+console.log(fn3.init === fn2.init); //false fn2没有实例化是不能够使用的
+console.log(fn3.init.call(b)); //继承初始化的b的值4 输出4
+var c = fn3.init;
+console.log(c()); //undefined
+
+		</script>
+	</body>
+</html>
