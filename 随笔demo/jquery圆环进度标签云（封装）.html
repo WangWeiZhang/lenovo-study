@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="js/worldCould/worldCould.js"></script>
+		<style type="text/css">
+			.main{
+				box-sizing: border-box;
+				padding: 14px;
+				width: 215px;
+			    height: 215px;
+			    border-radius: 100px;
+			    overflow: hidden;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    opacity: 0;
+			}
+			.indicatorContainer,.indicatorContainer1{
+				width: 215px;
+				height: 215px;
+    			border: 1px solid;
+			}
+			.outerBox{
+				width: 215px;
+				position: relative;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="outerBox">
+			<div class="indicatorContainer" id="indicatorContainer"></div> 
+			<div id="main" class="main" style=""></div>
+		</div>
+		<div class="outerBox">
+			<div class="indicatorContainer1" id="indicatorContainer1"></div> 
+			<div id="main1" class="main" style=""></div>
+		</div>
+		<div class="outerBox">
+			<div id="indicatorContainer2" class="indicatorContainer1" ></div> 
+			<div id="main2" class="main"></div>
+		</div>
+		<button id="btn1" style="width: 80px; height: 40px; margin-left: 50px;">点击我更新进度</button>
+		<script>
+			$(function(){
+				//初始化，圆环参数
+				var initArgument = {
+					radius:100,      //进度条圆环半径
+					borderBarWidth:1, //边框
+					barBgColor:"#fff", //圆环进度条背景
+					barColor:"blue", //动态进度条背景颜色
+					initValue:0,  //进度条初始值
+					minValue:0,   //进度条最小值
+					maxValue:100, //进度条最大值
+					frameTime:30, //每段动画的执行时间
+					displayNumber: false,//是否显示数字或者百分比提示
+					percentage: true, //是否添加百分号
+					barColor: {
+		                0: '#FF0000',
+		                40: '#FFFF00',
+		                70: '#0066FF',
+		                100: '#33CC33'
+		            }
+				}
+				//注册圆环 传递 id 和 参数
+				var progObj = radialIndicator('#indicatorContainer' , initArgument);
+				var progObj1 = radialIndicator('#indicatorContainer1' , initArgument);
+				var progObj2 = radialIndicator('#indicatorContainer2' , initArgument);
+				
+				
+				$("#btn1").click(function(){
+					//设置圆环变化随机数 
+					var aaa = parseInt(Math.random()*100);
+					//改变圆环 value
+					progObj.animate(aaa); // aaa  -> Number
+					progObj1.animate(aaa)
+					progObj2.animate(aaa)
+					
+					//实例化标签云对象
+					var worldCould1 = new WouldCloud(data , "main" , [0,80])
+					var worldCould2 = new WouldCloud(data , "main1" , [10,0])
+					var worldCould3 = new WouldCloud(data , "main2" , [80,0])
+					//生成标签云
+					worldCould1.init()
+					worldCould2.init()
+					worldCould3.init()
+				})
+				
+				//标签云数据  必须有value
+				var data=
+					[
+						{"name": "Who are you Who are you","value": "0"},  
+						{"name": "what is  name","value": "0"},
+						{"name": "can i  you","value": "0"},  
+						{"name": "yes i do","value": "0"},
+						{"name": "what is your name","value": "0"},  
+						{"name": "can i help you","value": "0"},
+						{"name": "what is your name","value": "0"},  
+						{"name": "can","value": "0"},
+						{"name": "what","value": "0"},  
+						{"name": "can i help you","value": "0"}
+					]
+		
+			})
+				
+			
+			
+			
+		</script>
+	</body>
+</html>
