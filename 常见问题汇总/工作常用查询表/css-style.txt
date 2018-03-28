@@ -29,3 +29,8 @@
 
 5、css3新增属性和样式
 	选择器、圆角边框、阴影text-shadow、渐变、弹性盒模型、@font-face自定义引入字体、对象变换过渡效果（transform、transition 2-3d）、animation。
+	
+6、css flex 以及 移动端兼容方案
+	https://www.jianshu.com/p/9a504d3c18fc //简书简单叙述flex
+	https://caniuse.com/#search=flex       //flex移动端兼容列表
+	http://flexboxfroggy.com/?utm_source=jsgroup#zh-cn // flex练习小游戏
