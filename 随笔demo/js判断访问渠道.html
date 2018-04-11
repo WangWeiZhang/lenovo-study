@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<style type="text/css">
+		</style>
 <script type="text/javascript">
         function browserRedirect() {
             var sUserAgent = navigator.userAgent.toLowerCase();
@@ -17,13 +19,28 @@
             document.writeln("您的浏览设备为：");
             if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
 //              alert("您访问的是mobile端");
-                window.location="http://www.baidu.com";
+//              window.location="http://www.baidu.com";
             } else {
 //              alert("您访问的是PC端");
             }
         }
         browserRedirect();
+      
 </script>
+  <script>        
+        (function (doc, win) {   
+            var docEl = doc.documentElement,   
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',   
+            recalc = function () {   
+            var clientWidth = docEl.clientWidth;   
+            if (!clientWidth) return;   
+            docEl.style.fontSize = 10 * (clientWidth / 750) + 'px';   
+        };   
+        if (!doc.addEventListener) return;   
+        win.addEventListener(resizeEvt, recalc, false);   
+        doc.addEventListener('DOMContentLoaded', recalc, false);   
+        })(document, window);
+ </script>
 	</head>
 	<body>
 	</body>
