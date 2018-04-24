@@ -1,3 +1,5 @@
+//echarts wouldCloud 和 初始化标签云代码整合
+
 //标签云
 function WouldCloud(data , elements , rotationRange){
 	this.data = data;
