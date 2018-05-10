@@ -34,3 +34,6 @@
 	https://www.jianshu.com/p/9a504d3c18fc //简书简单叙述flex
 	https://caniuse.com/#search=flex       //flex移动端兼容列表
 	http://flexboxfroggy.com/?utm_source=jsgroup#zh-cn // flex练习小游戏
+
+7、浏览器中Lato字体只显示中文，英文不显示（引入以下文件） 使用的时候 font-family:Lato ;  
+<link href='http://fonts.googleapis.com/css?family=Lato|Lora:400,700,700italic,400italic|Ubuntu:400,700' rel='stylesheet' type='text/css' />

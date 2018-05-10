@@ -1,0 +1,140 @@
+1、移动端 判断访问设备
+	var events = navigator.userAgent;
+	console.log(navigator.userAgent);
+	console.log(navigator.appVersion);
+	console.log(navigator)
+	if(events.indexOf('Android')>-1 || events.indexOf('Linux')>-1 || events.indexOf('Adr')>-1){
+		console.log("安卓手机");
+	}else if(events.indexOf('iPhone')>-1){
+		if(events.indexOf('Safari') > -1){ // safari 下各个苹果版本兼容判断方案
+			//根据尺寸进行判断 苹果的型号
+			if(screen.height == 812 && screen.width == 375){
+				console.log("苹果X");
+			}else if(screen.height == 736 && screen.width == 414){
+				console.log("iPhone7P - iPhone8P - iPhone6P");
+			}else if(screen.height == 667 && screen.width == 375){
+				console.log("iPhone7 - iPhone8 - iPhone6");
+			}else if(screen.height == 568 && screen.width == 320){
+				console.log("iPhone5");
+			}else{
+				console.log("iPhone4");
+			}
+		}
+	}else if(events.indexOf('Windows Phone')>-1){
+		console.log("诺基亚手机");
+	}else if(events.indexOf("iPad")>-1){
+		console.log("平板");
+	}
+
+2、rem 单位
+	a、添加 meta 标签在 head标签之间（不加会导致rem计算不准确）
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
+	b、添加动态计算html、font-size脚本
+		(function (doc, win) {    
+			var docEl = doc.documentElement,    
+			resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',    
+			recalc = function () {    
+			var clientWidth = docEl.clientWidth;    
+			if (!clientWidth) return;    
+			docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';    
+		};    
+		if (!doc.addEventListener) return;    
+		win.addEventListener(resizeEvt, recalc, false);    
+		doc.addEventListener('DOMContentLoaded', recalc, false);    
+		})(document, window); 
+		在750的设计图下，1rem = 100px；
+		注意：font-size尽量设置成100；这样方便换算，设置太小，比如20.... 到小屏幕rem计算不准确，因为浏览器最大支持字号12px；会导致宽高等比不准，间距和补丁不准。
+
+3、rem单位适用范围	
+	移动端宽高等比缩放：rem
+	移动端高度固定：px
+	移动端宽度响应 - 高度固定：百分比/rem + px
+	移动端：margin、padding：rem
+	移动端字体单位：rem 
+	
+4、苹果/sifari浏览器全屏
+	<meta name="viewport" content="minimal-ui">
+	body向上滑动自动全屏
+	
+5、swiper
+   swiper 官方网站         http://www.swiper.com.cn/
+   swiper4 Api官方文档     http://www.swiper.com.cn/api/index.html
+   swiper4 PC端demo        http://www.swiper.com.cn/demo/web/index.html
+   swiper4 移动端Demo      http://www.swiper.com.cn/demo/senior/index.html
+   swiper4 动态加载问题	   https://blog.csdn.net/aiyishengyishi/article/details/53634659 
+						   https://www.cnblogs.com/DivHao/p/6866399.html - 不能自动滚动，自动跟新数据，切换不正常
+						   
+6、iscroll jquery滚动条
+   iscroll 官方网站  	   http://iscrolljs.com/
+   iscroll 中文网站        https://blog.csdn.net/a41070289/article/details/50868038
+   
+   iscroll 动态插入dom高度更新问题：调用myScroll.refresh();方法，重新刷新scroll中元素个数和高度。
+   
+   iscroll 将滚动条滚动到最底部（聊天项目） 提示：让撑开的盒子高度 - 包裹盒子的高度 = 滚动条滚动的距离
+		   描述：
+				 a、动态获取被滚动盒子的高度 和 最外层盒子的高度，对比两个高度，如果被滚动的盒子高度 高于 最外层包裹他的盒子的时候，
+		         b、将 让撑开的盒子高度 - 包裹盒子的高度 = 滚动条滚动的距离
+				 c、然后使用 scrollTo(绝对起点，滚动多少) 参照固定的位置，每次滚动多少
+			     d、扩展：scrollBy(相对起点 ， 滚动多少)  参照相对位置，每次滚动的值会累加滚动条当前位置。
+		  
+ 		   var wrapperHeight = jq("#wrapper").height();
+		   var scrollBoxHeight = jq("#scroller").height();
+		   if(scrollBoxHeight > wrapperHeight){
+				console.log(wrapperHeight);
+				console.log(scrollBoxHeight);
+				var aaaaa = var aaaaa = scrollBoxHeight - wrapperHeight;
+				myScroll.scrollTo(0, -aaaaa);
+		   }
+   
+   iscroll 移动端scroll区域click失效：
+		    
+			方案（一）
+		    myScroll = new IScroll('#wrapper', {
+		    	click:true,  //调用iscroll插件，增加配置参数：click:true支持click/false不支持click 
+				scrollbars: true,
+				mouseWheel: true,
+				interactiveScrollbars: true,
+				shrinkScrollbars: 'scale',
+				fadeScrollbars: true
+			});
+			
+			方案（二）
+			myScroll = new IScroll('#wrapper', {
+		    	click:iScrollClick(),  //调用函数，兼容判断
+				scrollbars: true,
+				mouseWheel: true,
+				interactiveScrollbars: true,
+				shrinkScrollbars: 'scale',
+				fadeScrollbars: true
+			});
+			function iScrollClick(){
+				if (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent)) return false;
+				if (/Chrome/i.test(navigator.userAgent)) return (/Android/i.test(navigator.userAgent));
+				if (/Silk/i.test(navigator.userAgent)) return false;
+				if (/Android/i.test(navigator.userAgent)) {
+				   var s=navigator.userAgent.substr(navigator.userAgent.indexOf('Android')+8,3);
+				   return parseFloat(s[0]+s[3]) < 44 ? false : true
+				}
+			} 
+			
+	iscroll 禁止页面touchmove事件触发
+		//ref https://github.com/WICG/EventListenerOptions/pull/30
+		
+		function isPassive() {
+			var supportsPassiveOption = false;
+			try {
+				addEventListener("test", null, Object.defineProperty({}, 'passive', {
+					get: function () {
+						supportsPassiveOption = true;
+					}
+				}));
+			} catch(e) {}
+			return supportsPassiveOption;
+		}
+		//禁止页面touchmove事件
+		document.addEventListener('touchmove', function (e) { e.preventDefault(); }, isPassive() ? {
+			capture: false,
+			passive: false
+		} : false);
+			
+
